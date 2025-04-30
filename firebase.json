@@ -1,0 +1,41 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "servicereservationapp",
+          "appId": "1:636235891170:android:54e679fa16c8d952ebb9bb",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "servicereservationapp",
+          "appId": "1:636235891170:ios:14bf41d2691cbffdebb9bb",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "servicereservationapp",
+          "appId": "1:636235891170:ios:14bf41d2691cbffdebb9bb",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "servicereservationapp",
+          "configurations": {
+            "android": "1:636235891170:android:54e679fa16c8d952ebb9bb",
+            "ios": "1:636235891170:ios:14bf41d2691cbffdebb9bb",
+            "macos": "1:636235891170:ios:14bf41d2691cbffdebb9bb",
+            "web": "1:636235891170:web:b6efb797ec8a1bb4ebb9bb",
+            "windows": "1:636235891170:web:93279149641b74e1ebb9bb"
+          }
+        }
+      }
+    }
+  }
+}

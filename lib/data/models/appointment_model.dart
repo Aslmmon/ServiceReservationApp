@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:service_reservation_app/presentation/entities/appointment_status.dart'
+import 'package:service_reservation_app/domain/entities/appointment_status.dart'
     show AppointmentStatus;
 
 class Appointment {
