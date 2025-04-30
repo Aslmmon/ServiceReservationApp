@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "636235891170",
+    "project_id": "servicereservationapp",
+    "storage_bucket": "servicereservationapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636235891170:android:54e679fa16c8d952ebb9bb",
+        "android_client_info": {
+          "package_name": "com.aslmmovic.service_reservation_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeHL82vdrWbz9k6oBepbjl18biumcqS-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
