@@ -44,7 +44,7 @@ class AuthController extends GetxController {
     isLoading.value = false;
     if (result != null) {
       // Login successful, navigate to specialist list
-      Get.offAllNamed(AppRoutes.register);
+      Get.offAllNamed(AppRoutes.specialistList);
     } else {
       // Login failed, show error message
       errorMessage.value = 'Login failed. Invalid email or password.';

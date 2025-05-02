@@ -5,14 +5,17 @@ import 'package:service_reservation_app/presentation/auth/login_screen.dart'
     show LoginScreen;
 import 'package:service_reservation_app/presentation/auth/register_screen.dart'
     show RegisterScreen;
-
-// import '../specialist/bindings/specialist_binding.dart';
-// import '../specialist/screens/specialist_list_screen.dart';
-// import '../specialist/screens/specialist_detail_screen.dart';
-// import '../booking/bindings/booking_binding.dart';
-// import '../booking/screens/booking_screen.dart';
-// import '../appointment/bindings/appointment_binding.dart';
-// import '../appointment/screens/my_appointments_screen.dart';
+import '../presentation/appointments/my_appointments_screen.dart'
+    show MyAppointmentsScreen;
+import '../presentation/auth/bindings/appointment_binding.dart'
+    show AppointmentBinding;
+import '../presentation/auth/bindings/booking_binding.dart' show BookingBinding;
+import '../presentation/auth/bindings/specialist_binding.dart';
+import '../presentation/booking/booking_screen.dart' show BookingScreen;
+import '../presentation/specialists/specialist_detail_screen.dart'
+    show SpecialistDetailScreen;
+import '../presentation/specialists/specialist_list_screen.dart'
+    show SpecialistListScreen;
 
 class AppRoutes {
   static const login = '/login';
@@ -33,25 +36,25 @@ class AppRoutes {
       page: () => const RegisterScreen(),
       binding: AuthBinding(),
     ),
-    // GetPage(
-    //   name: specialistList,
-    //   page: () => const SpecialistListScreen(),
-    //   binding: SpecialistBinding(),
-    // ),
-    // GetPage(
-    //   name: specialistDetail,
-    //   page: () => const SpecialistDetailScreen(),
-    //   binding: SpecialistBinding(),
-    // ),
-    // GetPage(
-    //   name: booking,
-    //   page: () => const BookingScreen(),
-    //   binding: BookingBinding(),
-    // ),
-    // GetPage(
-    //   name: myAppointments,
-    //   page: () => const MyAppointmentsScreen(),
-    //   binding: AppointmentBinding(),
-    // ),
+    GetPage(
+      name: specialistList,
+      page: () => const SpecialistListScreen(),
+      binding: SpecialistBinding(),
+    ),
+    GetPage(
+      name: specialistDetail,
+      page: () => const SpecialistDetailScreen(),
+      binding: SpecialistBinding(),
+    ),
+    GetPage(
+      name: booking,
+      page: () => const BookingScreen(),
+      binding: BookingBinding(),
+    ),
+    GetPage(
+      name: myAppointments,
+      page: () => const MyAppointmentsScreen(),
+      binding: AppointmentBinding(),
+    ),
   ];
 }

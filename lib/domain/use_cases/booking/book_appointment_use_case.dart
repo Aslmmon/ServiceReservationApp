@@ -5,7 +5,11 @@ class BookAppointmentUseCase {
 
   BookAppointmentUseCase({required this.appointmentRepository});
 
-  Future<void> execute(String userId, String specialistId, DateTime dateTime) async {
+  Future<void> execute(
+    String userId,
+    String specialistId,
+    DateTime dateTime,
+  ) async {
     await appointmentRepository.bookAppointment(userId, specialistId, dateTime);
   }
 }
