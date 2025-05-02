@@ -5,6 +5,7 @@ import 'package:service_reservation_app/presentation/auth/login_screen.dart'
     show LoginScreen;
 import 'package:service_reservation_app/presentation/auth/register_screen.dart'
     show RegisterScreen;
+import 'package:service_reservation_app/presentation/home/HomeScreen.dart';
 import '../presentation/appointments/my_appointments_screen.dart'
     show MyAppointmentsScreen;
 import '../presentation/auth/bindings/appointment_binding.dart'
@@ -24,6 +25,7 @@ class AppRoutes {
   static const specialistDetail = '/specialist_detail';
   static const booking = '/booking';
   static const myAppointments = '/my_appointments';
+  static const home = '/home';
 
   static final pages = [
     GetPage(
@@ -56,5 +58,6 @@ class AppRoutes {
       page: () => const MyAppointmentsScreen(),
       binding: AppointmentBinding(),
     ),
+    GetPage(name: home, page: () => const HomeScreen(),binding: SpecialistBinding()),
   ];
 }

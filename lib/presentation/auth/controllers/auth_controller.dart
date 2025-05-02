@@ -27,7 +27,7 @@ class AuthController extends GetxController {
     isLoading.value = false;
     if (result != null) {
       // Registration successful, navigate to specialist list
-      Get.offAllNamed(AppRoutes.specialistList);
+      Get.offAllNamed(AppRoutes.home);
     } else {
       // Registration failed, show error message
       errorMessage.value = 'Registration failed. Please try again.';
@@ -44,7 +44,7 @@ class AuthController extends GetxController {
     isLoading.value = false;
     if (result != null) {
       // Login successful, navigate to specialist list
-      Get.offAllNamed(AppRoutes.specialistList);
+      Get.offAllNamed(AppRoutes.home);
     } else {
       // Login failed, show error message
       errorMessage.value = 'Login failed. Invalid email or password.';

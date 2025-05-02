@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/auth/controllers/SpecialistController.dart'
     show SpecialistController;
+import 'package:service_reservation_app/routes/app_routes.dart';
 
 class SpecialistListScreen extends GetView<SpecialistController> {
   const SpecialistListScreen({super.key});
@@ -87,9 +88,9 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                                   specialist.bio!.isNotEmpty)
                                 Text(
                                   specialist.bio!,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.grey,
+                                    color: Colors.grey[600],
                                   ),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
@@ -100,6 +101,18 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               () => controller.getSpecialistDetails(
                                 specialist.id,
                               ),
+                          trailing: ElevatedButton(
+                            onPressed: () {
+                              // Implement your booking logic here
+                              print(
+                                'Book button tapped for ${specialist.name}',
+                              );
+                              Get.toNamed(AppRoutes.booking);
+                              // You might want to navigate to a booking screen
+                              // and pass the specialist's information.
+                            },
+                            child: const Text('Book'),
+                          ),
                         ),
                       );
                     },
