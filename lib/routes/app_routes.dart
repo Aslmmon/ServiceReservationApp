@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:service_reservation_app/data/models/specialist_model.dart'
+    show Specialist;
 import 'package:service_reservation_app/presentation/auth/bindings/auth_binding.dart'
     show AuthBinding;
 import 'package:service_reservation_app/presentation/auth/login_screen.dart'
@@ -50,14 +52,20 @@ class AppRoutes {
     ),
     GetPage(
       name: booking,
-      page: () => const BookingScreen(),
+      page: ()=> BookingScreen(),
       binding: BookingBinding(),
+      arguments: Specialist,
+
     ),
     GetPage(
       name: myAppointments,
       page: () => const MyAppointmentsScreen(),
       binding: AppointmentBinding(),
     ),
-    GetPage(name: home, page: () => const HomeScreen(),binding: SpecialistBinding()),
+    GetPage(
+      name: home,
+      page: () => const HomeScreen(),
+      binding: SpecialistBinding(),
+    ),
   ];
 }

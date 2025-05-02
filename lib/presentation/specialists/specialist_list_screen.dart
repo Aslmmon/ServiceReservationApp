@@ -107,7 +107,10 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               print(
                                 'Book button tapped for ${specialist.name}',
                               );
-                              Get.toNamed(AppRoutes.booking);
+                              Get.toNamed(
+                                AppRoutes.booking,
+                                arguments: specialist,
+                              );
                               // You might want to navigate to a booking screen
                               // and pass the specialist's information.
                             },

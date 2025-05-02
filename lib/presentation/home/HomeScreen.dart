@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/appointments/my_appointments_screen.dart'
     show MyAppointmentsScreen;
 import 'package:service_reservation_app/presentation/specialists/specialist_list_screen.dart'

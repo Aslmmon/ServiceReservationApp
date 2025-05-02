@@ -31,7 +31,7 @@ class BookingController extends GetxController {
     );
 
     try {
-      final result = await _bookAppointmentUseCase.execute(
+      await _bookAppointmentUseCase.execute(
         userId,
         specialistId,
         selectedDateTime,
