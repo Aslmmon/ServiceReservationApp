@@ -1,0 +1,710 @@
+[
+  {
+    "collection": "specialists",
+    "documents": [
+      {
+        "id": "cardio01",
+        "fields": {
+          "name": "Dr. Heartbeat",
+          "specialization": "Cardiologist",
+          "bio": "Expert in adult cardiology and echocardiography.",
+          "availableDays": {
+            "Monday": [
+              "9:00",
+              "11:00"
+            ],
+            "Wednesday": [
+              "14:00",
+              "16:00"
+            ],
+            "Friday": [
+              "10:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "cardio02",
+        "fields": {
+          "name": "Dr. Valve",
+          "specialization": "Cardiologist",
+          "bio": "Specializes in interventional cardiology.",
+          "availableDays": {
+            "Tuesday": [
+              "10:00",
+              "12:00"
+            ],
+            "Thursday": [
+              "15:00",
+              "17:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "derm01",
+        "fields": {
+          "name": "Dr. SkinCare",
+          "specialization": "Dermatologist",
+          "bio": "Focuses on medical and cosmetic dermatology.",
+          "availableDays": {
+            "Monday": [
+              "13:00",
+              "16:00"
+            ],
+            "Wednesday": [
+              "9:00",
+              "12:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "derm02",
+        "fields": {
+          "name": "Dr. ClearSkin",
+          "specialization": "Dermatologist",
+          "bio": "Specialist in acne treatment and skin cancer screening.",
+          "availableDays": {
+            "Tuesday": [
+              "14:00",
+              "17:00"
+            ],
+            "Friday": [
+              "11:00",
+              "14:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "neuro01",
+        "fields": {
+          "name": "Dr. Neuron",
+          "specialization": "Neurologist",
+          "bio": "Diagnoses and treats disorders of the nervous system.",
+          "availableDays": {
+            "Tuesday": [
+              "9:30",
+              "11:30"
+            ],
+            "Thursday": [
+              "14:30",
+              "16:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "neuro02",
+        "fields": {
+          "name": "Dr. Brainy",
+          "specialization": "Neurologist",
+          "bio": "Specializes in epilepsy and headache management.",
+          "availableDays": {
+            "Monday": [
+              "15:00",
+              "17:00"
+            ],
+            "Wednesday": [
+              "10:00",
+              "12:00"
+            ],
+            "Friday": [
+              "14:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ortho01",
+        "fields": {
+          "name": "Dr. Joint",
+          "specialization": "Orthopedic Surgeon",
+          "bio": "Performs joint replacements and sports injury surgeries.",
+          "availableDays": {
+            "Monday": [
+              "8:00",
+              "10:00"
+            ],
+            "Thursday": [
+              "16:00",
+              "18:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ortho02",
+        "fields": {
+          "name": "Dr. BoneSetter",
+          "specialization": "Orthopedic Surgeon",
+          "bio": "Focuses on fracture care and pediatric orthopedics.",
+          "availableDays": {
+            "Wednesday": [
+              "13:00",
+              "15:00"
+            ],
+            "Friday": [
+              "9:00",
+              "11:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ped01",
+        "fields": {
+          "name": "Dr. ChildCare",
+          "specialization": "Pediatrician",
+          "bio": "Provides comprehensive healthcare for infants and children.",
+          "availableDays": {
+            "Tuesday": [
+              "11:00",
+              "13:00"
+            ],
+            "Thursday": [
+              "9:00",
+              "11:00"
+            ],
+            "Friday": [
+              "15:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ped02",
+        "fields": {
+          "name": "Dr. Tiny",
+          "specialization": "Pediatrician",
+          "bio": "Specializes in neonatology and infant nutrition.",
+          "availableDays": {
+            "Monday": [
+              "16:00",
+              "18:00"
+            ],
+            "Wednesday": [
+              "11:30",
+              "13:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "dentist01",
+        "fields": {
+          "name": "Dr. Smile",
+          "specialization": "Dentist",
+          "bio": "Offers general and cosmetic dentistry services.",
+          "availableDays": {
+            "Monday": [
+              "9:00",
+              "12:00"
+            ],
+            "Thursday": [
+              "14:00",
+              "17:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "dentist02",
+        "fields": {
+          "name": "Dr. Tooth",
+          "specialization": "Dentist",
+          "bio": "Specializes in orthodontics and pediatric dentistry.",
+          "availableDays": {
+            "Tuesday": [
+              "15:00",
+              "18:00"
+            ],
+            "Friday": [
+              "12:00",
+              "15:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "psych01",
+        "fields": {
+          "name": "Dr. Mindful",
+          "specialization": "Psychologist",
+          "bio": "Provides therapy for anxiety, depression, and stress.",
+          "availableDays": {
+            "Wednesday": [
+              "15:30",
+              "17:30"
+            ],
+            "Friday": [
+              "16:00",
+              "18:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "psych02",
+        "fields": {
+          "name": "Dr. Insight",
+          "specialization": "Psychologist",
+          "bio": "Specializes in cognitive behavioral therapy (CBT).",
+          "availableDays": {
+            "Monday": [
+              "11:30",
+              "13:30"
+            ],
+            "Thursday": [
+              "10:30",
+              "12:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "physio01",
+        "fields": {
+          "name": "Dr. MoveWell",
+          "specialization": "Physiotherapist",
+          "bio": "Helps patients recover from injuries and improve mobility.",
+          "availableDays": {
+            "Tuesday": [
+              "8:30",
+              "10:30"
+            ],
+            "Friday": [
+              "13:00",
+              "15:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "physio02",
+        "fields": {
+          "name": "Dr. Rehab",
+          "specialization": "Physiotherapist",
+          "bio": "Specializes in sports rehabilitation.",
+          "availableDays": {
+            "Wednesday": [
+              "8:00",
+              "10:00"
+            ],
+            "Thursday": [
+              "17:30",
+              "19:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "opth01",
+        "fields": {
+          "name": "Dr. SeeClear",
+          "specialization": "Ophthalmologist",
+          "bio": "Provides eye exams and treats eye diseases.",
+          "availableDays": {
+            "Monday": [
+              "14:00",
+              "16:00"
+            ],
+            "Friday": [
+              "8:30",
+              "10:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "opth02",
+        "fields": {
+          "name": "Dr. Vision",
+          "specialization": "Ophthalmologist",
+          "bio": "Specializes in laser eye surgery.",
+          "availableDays": {
+            "Tuesday": [
+              "13:30",
+              "15:30"
+            ],
+            "Thursday": [
+              "8:00",
+              "10:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "gastro01",
+        "fields": {
+          "name": "Dr. GutFeel",
+          "specialization": "Gastroenterologist",
+          "bio": "Diagnoses and treats digestive system disorders.",
+          "availableDays": {
+            "Wednesday": [
+              "10:30",
+              "12:30"
+            ],
+            "Friday": [
+              "17:00",
+              "19:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "gastro02",
+        "fields": {
+          "name": "Dr. Digest",
+          "specialization": "Gastroenterologist",
+          "bio": "Specializes in endoscopy and colonoscopy.",
+          "availableDays": {
+            "Monday": [
+              "17:30",
+              "19:30"
+            ],
+            "Thursday": [
+              "11:30",
+              "13:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "endo01",
+        "fields": {
+          "name": "Dr. Hormone",
+          "specialization": "Endocrinologist",
+          "bio": "Treats hormonal imbalances and metabolic disorders.",
+          "availableDays": {
+            "Tuesday": [
+              "16:30",
+              "18:30"
+            ],
+            "Friday": [
+              "9:30",
+              "11:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "endo02",
+        "fields": {
+          "name": "Dr. Balance",
+          "specialization": "Endocrinologist",
+          "bio": "Specializes in diabetes management.",
+          "availableDays": {
+            "Wednesday": [
+              "17:00",
+              "19:00"
+            ],
+            "Thursday": [
+              "13:00",
+              "15:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "uro01",
+        "fields": {
+          "name": "Dr. Flow",
+          "specialization": "Urologist",
+          "bio": "Treats disorders of the urinary tract and male reproductive system.",
+          "availableDays": {
+            "Monday": [
+              "12:30",
+              "14:30"
+            ],
+            "Friday": [
+              "18:30",
+              "20:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "uro02",
+        "fields": {
+          "name": "Dr. Kidney",
+          "specialization": "Urologist",
+          "bio": "Specializes in kidney stones and prostate issues.",
+          "availableDays": {
+            "Tuesday": [
+              "10:30",
+              "12:30"
+            ],
+            "Thursday": [
+              "19:00",
+              "21:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "pulm01",
+        "fields": {
+          "name": "Dr. Breath",
+          "specialization": "Pulmonologist",
+          "bio": "Treats lung diseases and respiratory conditions.",
+          "availableDays": {
+            "Wednesday": [
+              "14:30",
+              "16:30"
+            ],
+            "Friday": [
+              "11:30",
+              "13:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "pulm02",
+        "fields": {
+          "name": "Dr. Lung",
+          "specialization": "Pulmonologist",
+          "bio": "Specializes in asthma and COPD management.",
+          "availableDays": {
+            "Monday": [
+              "19:00",
+              "21:00"
+            ],
+            "Thursday": [
+              "14:30",
+              "16:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "card_surg01",
+        "fields": {
+          "name": "Dr. OpenHeart",
+          "specialization": "Cardiothoracic Surgeon",
+          "bio": "Performs heart and lung surgeries.",
+          "availableDays": {
+            "Tuesday": [
+              "9:00",
+              "11:00"
+            ],
+            "Friday": [
+              "16:30",
+              "18:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "card_surg02",
+        "fields": {
+          "name": "Dr. Chest",
+          "specialization": "Cardiothoracic Surgeon",
+          "bio": "Specializes in bypass surgery and valve repair.",
+          "availableDays": {
+            "Wednesday": [
+              "11:00",
+              "13:00"
+            ],
+            "Thursday": [
+              "8:30",
+              "10:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "plastic01",
+        "fields": {
+          "name": "Dr. Sculpt",
+          "specialization": "Plastic Surgeon",
+          "bio": "Offers cosmetic and reconstructive surgery.",
+          "availableDays": {
+            "Monday": [
+              "10:30",
+              "12:30"
+            ],
+            "Friday": [
+              "13:30",
+              "15:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "plastic02",
+        "fields": {
+          "name": "Dr. Beauty",
+          "specialization": "Plastic Surgeon",
+          "bio": "Specializes in facial rejuvenation and breast augmentation.",
+          "availableDays": {
+            "Tuesday": [
+              "17:30",
+              "19:30"
+            ],
+            "Thursday": [
+              "10:00",
+              "12:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ent01",
+        "fields": {
+          "name": "Dr. EarThroat",
+          "specialization": "ENT Specialist",
+          "bio": "Treats ear, nose, and throat disorders.",
+          "availableDays": {
+            "Wednesday": [
+              "9:30",
+              "11:30"
+            ],
+            "Friday": [
+              "15:00",
+              "17:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ent02",
+        "fields": {
+          "name": "Dr. Sound",
+          "specialization": "ENT Specialist",
+          "bio": "Specializes in hearing and balance issues.",
+          "availableDays": {
+            "Monday": [
+              "8:30",
+              "10:30"
+            ],
+            "Thursday": [
+              "16:30",
+              "18:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "rheum01",
+        "fields": {
+          "name": "Dr. JointCare",
+          "specialization": "Rheumatologist",
+          "bio": "Treats arthritis and other musculoskeletal conditions.",
+          "availableDays": {
+            "Tuesday": [
+              "12:30",
+              "14:30"
+            ],
+            "Friday": [
+              "10:30",
+              "12:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "rheum02",
+        "fields": {
+          "name": "Dr. Motion",
+          "specialization": "Rheumatologist",
+          "bio": "Specializes in autoimmune rheumatic diseases.",
+          "availableDays": {
+            "Wednesday": [
+              "16:30",
+              "18:30"
+            ],
+            "Thursday": [
+              "9:30",
+              "11:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "oncology01",
+        "fields": {
+          "name": "Dr. Hope",
+          "specialization": "Oncologist",
+          "bio": "Specializes in the diagnosis and treatment of cancer.",
+          "availableDays": {
+            "Monday": [
+              "15:30",
+              "17:30"
+            ],
+            "Friday": [
+              "17:30",
+              "19:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "oncology02",
+        "fields": {
+          "name": "Dr. Cure",
+          "specialization": "Oncologist",
+          "bio": "Focuses on chemotherapy and radiation therapy.",
+          "availableDays": {
+            "Tuesday": [
+              "19:00",
+              "21:00"
+            ],
+            "Thursday": [
+              "12:30",
+              "14:30"
+            ]
+          }
+        }
+      },
+      {
+        "id": "nephro01",
+        "fields": {
+          "name": "Dr. Filter",
+          "specialization": "Nephrologist",
+          "bio": "Treats kidney diseases and hypertension.",
+          "availableDays": {
+            "Wednesday": [
+              "12:30",
+              "14:30"
+            ],
+            "Friday": [
+              "8:00",
+              "10:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "nephro02",
+        "fields": {
+          "name": "Dr. Renal",
+          "specialization": "Nephrologist",
+          "bio": "Specializes in dialysis and kidney transplantation.",
+          "availableDays": {
+            "Monday": [
+              "9:30",
+              "11:30"
+            ],
+            "Thursday": [
+              "18:00",
+              "20:00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "diet01",
+        "fields": {
+          "name": "Ms. FoodWise",
+          "specialization": "Dietitian",
+          "bio": "Provides nutritional counseling and meal planning.",
+          "availableDays": {
+            "Tuesday": [
+              "8:00",
+              "10:00"
+            ],
+            "Friday": [
+              ",

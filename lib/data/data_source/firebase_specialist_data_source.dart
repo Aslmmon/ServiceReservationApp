@@ -4,7 +4,7 @@ import '../models/specialist_model.dart' show Specialist;
 
 class FirebaseSpecialistRepository implements SpecialistRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _specialistsCollection = 'specialists';
+  final String _specialistsCollection = 'Specialists';
 
   @override
   Future<List<Specialist>> getAllSpecialists() async {
@@ -12,6 +12,7 @@ class FirebaseSpecialistRepository implements SpecialistRepository {
         await _firestore.collection(_specialistsCollection).get();
     return snapshot.docs.map((doc) => Specialist.fromFirestore(doc)).toList();
   }
+
 
   @override
   Future<Specialist?> getSpecialistById(String id) async {
