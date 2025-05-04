@@ -1,15 +1,20 @@
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:service_reservation_app/routes/app_navigation.dart';
 import 'package:service_reservation_app/routes/app_routes.dart' show AppRoutes;
 import 'package:service_reservation_app/utils/appColors/AppColors.dart';
+import 'package:service_reservation_app/utils/appStrings/AppStrings.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Get.putAsync(() async => AppNavigation());
   runApp(const MyApp());
 }
 
@@ -19,8 +24,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    AppNavigation.to.handleInitialNavigation();
     return GetMaterialApp(
-      title: 'Service Reservation App',
+      title: AppStrings.appName,
       theme: ThemeData(
         primaryColor: AppColors.primaryPurple,
         colorScheme: ThemeData().colorScheme.copyWith(
@@ -31,8 +37,9 @@ class MyApp extends StatelessWidget {
               .textTheme, // Use the default light theme's textTheme as a base
         ),
       ),
-      initialRoute: AppRoutes.login, // Set initial route
-      getPages: AppRoutes.pages, // Define your routes
+      initialRoute: AppRoutes.splash,
+      // Set initial route
+      getPages: AppRoutes.pages,
     );
   }
 }

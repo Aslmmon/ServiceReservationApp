@@ -8,6 +8,8 @@ import 'package:service_reservation_app/presentation/auth/login_screen.dart'
 import 'package:service_reservation_app/presentation/auth/register_screen.dart'
     show RegisterScreen;
 import 'package:service_reservation_app/presentation/home/HomeScreen.dart';
+import 'package:service_reservation_app/presentation/splash/SplashScreen.dart';
+import '../main.dart';
 import '../presentation/appointments/my_appointments_screen.dart'
     show MyAppointmentsScreen;
 import '../presentation/auth/bindings/appointment_binding.dart'
@@ -28,8 +30,10 @@ class AppRoutes {
   static const booking = '/booking';
   static const myAppointments = '/my_appointments';
   static const home = '/home';
+  static const splash = '/'; // Set loading as the root route
 
   static final pages = [
+    GetPage(name: splash, page: () => const Splashscreen()), // Add the loading screen route
     GetPage(name: login, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: register,

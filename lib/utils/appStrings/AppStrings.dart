@@ -1,4 +1,6 @@
 class AppStrings {
+  static const String appName = 'Service Reservation App';
+
   static const String welcomeBack = 'Welcome Back';
   static const String login = 'Login';
   static const String emailLabel = 'Email';
@@ -9,7 +11,6 @@ class AppStrings {
   static const String noAccountQuestion = 'Don\'t have an account?';
   static const String signUpLink = 'Sign Up';
 
-
   static const String helloBeautiful = 'Hello Beautiful';
   static const String signUp = 'Sign Up';
   static const String fullNameLabel = 'Full Name';
@@ -17,5 +18,4 @@ class AppStrings {
   static const String signingUpButtonText = 'Signing Up...';
   static const String alreadyHaveAccountQuestion = 'Already have an account?';
   static const String loginLink = 'Login';
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/auth/controllers/auth_controller.dart';
 import 'package:service_reservation_app/routes/app_routes.dart';
@@ -29,9 +30,9 @@ class LoginScreen extends GetView<AuthController> {
               Text(AppStrings.login, style: AppTextStyles.heading),
               const SizedBox(height: 32),
               // Image
-              Image.asset(
-                'person.png', // Path to your SVG file
-                height: 250,
+              SvgPicture.asset(
+                'person.svg', // Path to your SVG file
+                height: 150,
               ),
               const SizedBox(height: 32),
               ReusableTextField(
@@ -66,7 +67,6 @@ class LoginScreen extends GetView<AuthController> {
                     style: AppTextStyles.linkText,
                   ),
                 ),
-
               ),
               const SizedBox(height: 24),
               Obx(

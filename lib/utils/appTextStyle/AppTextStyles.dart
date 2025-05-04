@@ -18,7 +18,7 @@ class AppTextStyles {
     color: AppColors.lightText,
   );
   static TextStyle buttonText = GoogleFonts.montserrat(
-    fontSize: 18,
+    fontSize: 12,
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
