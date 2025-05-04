@@ -30,11 +30,7 @@ class AppRoutes {
   static const home = '/home';
 
   static final pages = [
-    GetPage(
-      name: login,
-      page: () => const LoginScreen(),
-      binding: AuthBinding(),
-    ),
+    GetPage(name: login, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: register,
       page: () => const RegisterScreen(),
@@ -52,10 +48,9 @@ class AppRoutes {
     ),
     GetPage(
       name: booking,
-      page: ()=> BookingScreen(),
+      page: () => BookingScreen(),
       binding: BookingBinding(),
       arguments: Specialist,
-
     ),
     GetPage(
       name: myAppointments,

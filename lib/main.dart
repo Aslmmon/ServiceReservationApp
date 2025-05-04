@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:service_reservation_app/routes/app_routes.dart' show AppRoutes;
+import 'package:service_reservation_app/utils/appColors/AppColors.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -19,7 +21,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Service Reservation App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primaryColor: AppColors.primaryPurple,
+        colorScheme: ThemeData().colorScheme.copyWith(
+          primary: AppColors.primaryPurple,
+        ),
+        textTheme: GoogleFonts.montserratTextTheme(
+          ThemeData.light()
+              .textTheme, // Use the default light theme's textTheme as a base
+        ),
+      ),
       initialRoute: AppRoutes.login, // Set initial route
       getPages: AppRoutes.pages, // Define your routes
     );
