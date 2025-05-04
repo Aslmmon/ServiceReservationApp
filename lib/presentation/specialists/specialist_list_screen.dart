@@ -10,7 +10,6 @@ class SpecialistListScreen extends GetView<SpecialistController> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = Get.find(); // Find your AuthController
 
     return Scaffold(
       appBar: AppBar(
@@ -110,7 +109,8 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               print(
                                 'Book button tapped for ${specialist.name}',
                               );
-                              authController.logout();
+                              Get.find<AuthController>().logout(); // Access AuthController directly here
+
                               // Get.toNamed(
                               //   AppRoutes.booking,
                               //   arguments: specialist,

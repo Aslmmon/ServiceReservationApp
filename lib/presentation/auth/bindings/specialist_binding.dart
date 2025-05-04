@@ -7,15 +7,13 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_all_sp
     show GetAllSpecialistsUseCase;
 import 'package:service_reservation_app/domain/use_cases/specialities/get_specialist_by_id_use_case.dart'
     show GetSpecialistByIdUseCase;
-import 'package:service_reservation_app/presentation/auth/bindings/core_binding.dart';
 import 'package:service_reservation_app/presentation/auth/controllers/SpecialistController.dart'
     show SpecialistController;
 
 
-class SpecialistBinding extends CoreBinding {
+class SpecialistBinding extends Bindings {
   @override
   void dependencies() {
-    super.dependencies();
     Get.lazyPut<SpecialistRepository>(() => FirebaseSpecialistRepository());
     Get.lazyPut(
       () => GetAllSpecialistsUseCase(specialistRepository: Get.find()),

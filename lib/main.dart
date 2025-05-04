@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:service_reservation_app/presentation/auth/bindings/auth_binding.dart';
 import 'package:service_reservation_app/routes/app_navigation.dart';
 import 'package:service_reservation_app/routes/app_routes.dart' show AppRoutes;
 import 'package:service_reservation_app/utils/appColors/AppColors.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: AppStrings.appName,
+      initialBinding: AuthBinding(),
       theme: ThemeData(
         primaryColor: AppColors.primaryPurple,
         colorScheme: ThemeData().colorScheme.copyWith(

@@ -17,8 +17,7 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      //AppNavigation.to.handleInitialNavigation();
-      Get.offAllNamed(AppRoutes.login);
+      AppNavigation.to.handleInitialNavigation();
     });
   }
 

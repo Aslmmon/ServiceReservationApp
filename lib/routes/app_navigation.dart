@@ -27,13 +27,7 @@ class AppNavigation extends GetxService {
     }
   }
 
-  // Method to navigate to Home (can be called from AuthController)
-  void goToHome() {
-    Get.offAllNamed(AppRoutes.home);
-  }
+  void goToHome() => Get.offAllNamed(AppRoutes.home);
 
-  // Method to navigate to Login (can be called from AuthController or logout)
-  void goToLogin() {
-    Get.offAllNamed(AppRoutes.login);
-  }
+  void goToLogin() => Get.offAllNamed(AppRoutes.login);
 }
