@@ -66,6 +66,7 @@ class LoginScreen extends GetView<AuthController> {
                     style: AppTextStyles.linkText,
                   ),
                 ),
+
               ),
               const SizedBox(height: 24),
               Obx(

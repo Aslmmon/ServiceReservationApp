@@ -33,7 +33,7 @@ class AppRoutes {
     GetPage(name: login, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: register,
-      page: () => const RegisterScreen(),
+      page: () => RegisterScreen(),
       binding: AuthBinding(),
     ),
     GetPage(
