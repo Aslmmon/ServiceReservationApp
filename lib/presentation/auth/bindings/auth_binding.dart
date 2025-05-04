@@ -9,11 +9,16 @@ class AuthBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UserRepository>(() => FirebaseUserRepository(), fenix: true);
-    Get.lazyPut(() => RegisterUserUseCase(userRepository: Get.find()), fenix: true);
-    Get.lazyPut(() => LoginUserUseCase(userRepository: Get.find()), fenix: true);
+    Get.lazyPut(
+      () => RegisterUserUseCase(userRepository: Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => LoginUserUseCase(userRepository: Get.find()),
+      fenix: true,
+    );
 
     // Global Controller
     Get.lazyPut(() => AuthController(), fenix: true);
   }
 }
-

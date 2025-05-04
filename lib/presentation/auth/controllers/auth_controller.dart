@@ -5,7 +5,6 @@ import 'package:service_reservation_app/domain/use_cases/auth/RegisterUserUseCas
     show RegisterUserUseCase;
 import '../../../../domain/use_cases/auth/login_user_use_case.dart';
 import '../../../../routes/app_routes.dart';
-import '../../../routes/app_navigation.dart';
 
 class AuthController extends GetxController {
   final RegisterUserUseCase _registerUserUseCase = Get.find();

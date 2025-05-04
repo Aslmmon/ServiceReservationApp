@@ -36,7 +36,7 @@ class AppRoutes {
     GetPage(name: splash, page: () => const Splashscreen()),
     // Add the loading screen route
     GetPage(name: login, page: () => LoginScreen(),
-        // binding: AuthBinding()
+         binding: AuthBinding()
     ),
     GetPage(
       name: register,
