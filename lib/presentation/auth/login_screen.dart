@@ -30,8 +30,8 @@ class LoginScreen extends GetView<AuthController> {
               Text(AppStrings.login, style: AppTextStyles.heading),
               const SizedBox(height: 32),
               // Image
-              SvgPicture.asset(
-                'person.svg', // Path to your SVG file
+              Image.asset(
+                'assets/images/person.png', // Path to your SVG file
                 height: 150,
               ),
               const SizedBox(height: 32),

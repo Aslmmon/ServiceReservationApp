@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/auth/controllers/SpecialistController.dart'
     show SpecialistController;
-import 'package:service_reservation_app/routes/app_routes.dart';
+
+import '../auth/controllers/auth_controller.dart';
 
 class SpecialistListScreen extends GetView<SpecialistController> {
   const SpecialistListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = Get.find(); // Find your AuthController
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Specialists'),
@@ -107,10 +110,11 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               print(
                                 'Book button tapped for ${specialist.name}',
                               );
-                              Get.toNamed(
-                                AppRoutes.booking,
-                                arguments: specialist,
-                              );
+                              authController.logout();
+                              // Get.toNamed(
+                              //   AppRoutes.booking,
+                              //   arguments: specialist,
+                              // );
                               // You might want to navigate to a booking screen
                               // and pass the specialist's information.
                             },

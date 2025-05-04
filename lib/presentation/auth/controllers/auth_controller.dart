@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/RegisterUserUseCase.dart'
     show RegisterUserUseCase;
 import '../../../../domain/use_cases/auth/login_user_use_case.dart';
 import '../../../../routes/app_routes.dart';
+import '../../../routes/app_navigation.dart';
 
 class AuthController extends GetxController {
   final RegisterUserUseCase _registerUserUseCase = Get.find();
@@ -13,6 +15,7 @@ class AuthController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> register() async {
     isLoading.value = true;
@@ -41,11 +44,18 @@ class AuthController extends GetxController {
     );
     isLoading.value = false;
     if (result != null) {
-      // Login successful, navigate to specialist list
       Get.offAllNamed(AppRoutes.home);
     } else {
-      // Login failed, show error message
       errorMessage.value = 'Login failed. Invalid email or password.';
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      await _auth.signOut();
+      Get.offAllNamed(AppRoutes.login);
+    } catch (e) {
+      print('Error signing out: $e');
     }
   }
 

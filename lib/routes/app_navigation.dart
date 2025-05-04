@@ -13,31 +13,16 @@ class AppNavigation extends GetxService {
       return;
     }
     _isFirstLaunch.value = false;
-    _auth.authStateChanges().listen((User? user) {
-      if (user == null) {
-        // User is not logged in, navigate to Login
-        if (Get.currentRoute != AppRoutes.login &&
-            Get.currentRoute != AppRoutes.register) {
-          Get.offAllNamed(AppRoutes.login);
-        }
-      } else {
-        // User is logged in, navigate to Home
-        if (Get.currentRoute != AppRoutes.home) {
-          Get.offAllNamed(AppRoutes.home);
-        }
-      }
-    });
-
     // Check initial state immediately on service initialization
     final User? initialUser = _auth.currentUser;
     if (initialUser == null) {
       if (Get.currentRoute != AppRoutes.login &&
           Get.currentRoute != AppRoutes.register) {
-        Get.offAllNamed(AppRoutes.login);
+        goToLogin();
       }
     } else {
       if (Get.currentRoute != AppRoutes.home) {
-        Get.offAllNamed(AppRoutes.home);
+        goToHome();
       }
     }
   }

@@ -43,7 +43,7 @@ class RegisterScreen extends GetView<AuthController> {
               const SizedBox(height: 32),
               // Image
               Image.asset(
-                'person.png', // Replace with your actual signup illustration
+                'assets/images/person.png', // Replace with your actual signup illustration
                 height: 150, // Adjust height as needed
               ),
               const SizedBox(height: 32),

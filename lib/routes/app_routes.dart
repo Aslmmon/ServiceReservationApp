@@ -33,7 +33,8 @@ class AppRoutes {
   static const splash = '/'; // Set loading as the root route
 
   static final pages = [
-    GetPage(name: splash, page: () => const Splashscreen()), // Add the loading screen route
+    GetPage(name: splash, page: () => const Splashscreen()),
+    // Add the loading screen route
     GetPage(name: login, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: register,

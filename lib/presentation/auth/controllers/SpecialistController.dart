@@ -6,7 +6,6 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_all_sp
     show GetAllSpecialistsUseCase;
 import 'package:service_reservation_app/domain/use_cases/specialities/get_specialist_by_id_use_case.dart'
     show GetSpecialistByIdUseCase;
-
 import '../../../routes/app_routes.dart';
 
 class SpecialistController extends GetxController {
