@@ -8,16 +8,23 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
   final String _appointmentsCollection = 'appointments';
 
   @override
-  Future<void> bookAppointment(String userId, String specialistId, DateTime dateTime) async {
+  Future<void> bookAppointment(
+    String userId,
+    String specialistId,
+    DateTime dateTime,
+  ) async {
     try {
       final Appointment appointment = Appointment(
-        id: '', // Firestore will auto-generate an ID
+        id: '',
+        // Firestore will auto-generate an ID
         userId: userId,
         specialistId: specialistId,
         dateTime: dateTime,
         status: AppointmentStatus.booked,
       );
-      await _firestore.collection(_appointmentsCollection).add(appointment.toFirestore());
+      await _firestore
+          .collection(_appointmentsCollection)
+          .add(appointment.toFirestore());
     } catch (e) {
       print('Error booking appointment: $e');
       rethrow;
@@ -26,17 +33,21 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
 
   @override
   Future<List<Appointment>> getUserAppointments(String userId) async {
-    final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-        .collection(_appointmentsCollection)
-        .where('userId', isEqualTo: userId)
-        .get();
+    final QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _firestore
+            .collection(_appointmentsCollection)
+            .where('userId', isEqualTo: userId)
+            .get();
     return snapshot.docs.map((doc) => Appointment.fromFirestore(doc)).toList();
   }
 
   @override
   Future<void> cancelAppointment(String appointmentId) async {
     try {
-      await _firestore.collection(_appointmentsCollection).doc(appointmentId).update({'status': AppointmentStatus.cancelled.name.toLowerCase()});
+      await _firestore
+          .collection(_appointmentsCollection)
+          .doc(appointmentId)
+          .delete();
     } catch (e) {
       print('Error cancelling appointment: $e');
       rethrow;

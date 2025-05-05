@@ -7,7 +7,6 @@ import 'package:service_reservation_app/presentation/auth/register_screen.dart'
     show RegisterScreen;
 import 'package:service_reservation_app/presentation/home/HomeScreen.dart';
 import 'package:service_reservation_app/presentation/splash/SplashScreen.dart';
-import '../main.dart';
 import '../presentation/appointments/appointments_screen.dart'
     show MyAppointmentsScreen;
 
@@ -16,8 +15,6 @@ import '../presentation/bindings/auth_binding.dart';
 import '../presentation/bindings/booking_binding.dart';
 import '../presentation/bindings/specialist_binding.dart';
 import '../presentation/booking/booking_screen.dart' show BookingScreen;
-import '../presentation/specialists/specialist_detail_screen.dart'
-    show SpecialistDetailScreen;
 import '../presentation/specialists/specialist_list_screen.dart'
     show SpecialistListScreen;
 
@@ -25,7 +22,6 @@ class AppRoutes {
   static const login = '/login';
   static const register = '/register';
   static const specialistList = '/specialists';
-  static const specialistDetail = '/specialist_detail';
   static const booking = '/booking';
   static const myAppointments = '/my_appointments';
   static const home = '/home';
@@ -33,7 +29,6 @@ class AppRoutes {
 
   static final pages = [
     GetPage(name: splash, page: () => const Splashscreen()),
-    // Add the loading screen route
     GetPage(name: login, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: register,
@@ -43,12 +38,7 @@ class AppRoutes {
     GetPage(
       name: specialistList,
       page: () => const SpecialistListScreen(),
-      binding: SpecialistBinding(),
-    ),
-    GetPage(
-      name: specialistDetail,
-      page: () => const SpecialistDetailScreen(),
-      binding: SpecialistBinding(),
+      binding: SpecialistBinding()
     ),
     GetPage(
       name: booking,
@@ -59,12 +49,11 @@ class AppRoutes {
     GetPage(
       name: myAppointments,
       page: () => const MyAppointmentsScreen(),
-      binding: AppointmentBinding(),
+      binding: AppointmentBinding()
     ),
     GetPage(
       name: home,
       page: () => const HomeScreen(),
-      binding: SpecialistBinding(),
-    ),
+    bindings: [SpecialistBinding(),AppointmentBinding()]),
   ];
 }

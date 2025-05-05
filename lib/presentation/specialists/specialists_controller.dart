@@ -7,7 +7,6 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_all_sp
     show GetAllSpecialistsUseCase;
 import 'package:service_reservation_app/domain/use_cases/specialities/get_specialist_by_id_use_case.dart'
     show GetSpecialistByIdUseCase;
-import '../../routes/app_routes.dart';
 
 class SpecialistController extends GetxController {
   final GetAllSpecialistsUseCase _getAllSpecialistsUseCase = Get.find();
@@ -72,7 +71,6 @@ class SpecialistController extends GetxController {
     isLoading.value = false;
     if (result != null) {
       selectedSpecialist.value = result;
-      Get.toNamed(AppRoutes.specialistDetail, arguments: result);
     } else {
       errorMessage.value = 'Failed to fetch specialist details.';
     }

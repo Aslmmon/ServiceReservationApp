@@ -1,14 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '../../../data/data_source/firebase_user_data_source.dart';
 import '../../../data/models/appointment_model.dart';
 import '../../../domain/use_cases/appointment/CancelAppointmentUseCase.dart';
-import '../../../domain/use_cases/appointment/GetUserAppointmentsUseCase.dart';
+import '../../domain/use_cases/appointment/GetUserAppointmentsUseCase.dart';
 
 class MyAppointmentsController extends GetxController {
   final GetUserAppointmentsUseCase _getUserAppointmentsUseCase = Get.find();
   final CancelAppointmentUseCase _cancelAppointmentUseCase = Get.find();
-  final FirebaseUserRepository _userRepository = Get.find();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final RxList<Appointment> appointments = <Appointment>[].obs;
   final RxBool isLoading = false.obs;
@@ -23,19 +23,16 @@ class MyAppointmentsController extends GetxController {
   Future<void> fetchUserAppointments() async {
     isLoading.value = true;
     errorMessage.value = '';
-    final user = await _userRepository.getCurrentUser();
+    print("user uid is + ${_auth.currentUser!.uid}");
 
-    if (user != null) {
-      final result = await _getUserAppointmentsUseCase.execute(user.id);
-      isLoading.value = false;
-      if (result != null) {
-        appointments.assignAll(result);
-      } else {
-        errorMessage.value = 'Failed to fetch your appointments.';
-      }
+    final result = await _getUserAppointmentsUseCase.execute(
+      _auth.currentUser!.uid,
+    );
+    isLoading.value = false;
+    if (result != null) {
+      appointments.assignAll(result);
     } else {
-      isLoading.value = false;
-      errorMessage.value = 'User not logged in.';
+      errorMessage.value = 'Failed to fetch your appointments.';
     }
   }
 

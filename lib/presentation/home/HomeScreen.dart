@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:service_reservation_app/presentation/appointments/appointments_screen.dart'
     show MyAppointmentsScreen;
 import 'package:service_reservation_app/presentation/specialists/specialist_list_screen.dart'
     show SpecialistListScreen;
+
+import '../appointments/appointments_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    const SpecialistListScreen(),
-    const MyAppointmentsScreen(), // Placeholder for Upcoming Reservations
+    SpecialistListScreen(),
+    MyAppointmentsScreen(),
   ];
 
   void _onItemTapped(int index) {
