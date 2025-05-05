@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import '../../../domain/use_cases/booking/book_appointment_use_case.dart';
-import 'package:flutter/material.dart'; // For context
 
 class BookingController extends GetxController {
   final BookAppointmentUseCase _bookAppointmentUseCase = Get.find();
@@ -13,28 +12,20 @@ class BookingController extends GetxController {
   Future<void> bookAppointment(
     String specialistId,
     String userId,
-    BuildContext context,
+    DateTime datetime,
   ) async {
-    if (selectedDate.value == null || selectedTime.value == null) {
-      Get.snackbar('Error', 'Please select a date and time.');
-      return;
-    }
 
     isBooking.value = true;
     bookingError.value = '';
-    final selectedDateTime = DateTime(
-      selectedDate.value!.year,
-      selectedDate.value!.month,
-      selectedDate.value!.day,
-      int.parse(selectedTime.value!.split(':')[0]),
-      int.parse(selectedTime.value!.split(':')[1]),
-    );
 
+    print(
+      'Confirming booking for Specialist ID: $specialistId on ${datetime.toLocal()} userId : $userId',
+    );
     try {
       await _bookAppointmentUseCase.execute(
         userId,
         specialistId,
-        selectedDateTime,
+        datetime,
       );
       isBooking.value = false;
       Get.snackbar('Success', 'Appointment booked successfully!');
@@ -44,11 +35,5 @@ class BookingController extends GetxController {
     }
   }
 
-  void selectDate(DateTime date) {
-    selectedDate.value = date;
-  }
 
-  void selectTime(String time) {
-    selectedTime.value = time;
-  }
 }

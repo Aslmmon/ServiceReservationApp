@@ -63,7 +63,6 @@ class _BookingScreenState extends State<BookingScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,11 +220,11 @@ class _BookingScreenState extends State<BookingScreen> {
                     _selectedDay,
                     _selectedTime?.format(context),
                     _specialist?.id,
-                    () {
+                    (appointment) {
                       bookingController.bookAppointment(
-                        _specialist!.id,
-                        "test", // You'll likely replace this with actual data
-                        context,
+                        appointment.specialistId,
+                        appointment.userId,
+                        appointment.dateTime,
                       );
                     },
                   );
