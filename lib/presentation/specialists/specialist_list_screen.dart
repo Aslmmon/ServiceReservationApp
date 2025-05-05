@@ -2,47 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/auth/controllers/SpecialistController.dart'
     show SpecialistController;
-
-import '../auth/controllers/auth_controller.dart';
+import 'package:service_reservation_app/presentation/specialists/SpecialistItem.dart';
+import '../../utils/appColors/AppColors.dart';
+import '../../utils/appStrings/AppStrings.dart';
+import '../../utils/appTextStyle/AppTextStyles.dart';
+import '../../utils/components/AppTextField.dart';
 
 class SpecialistListScreen extends GetView<SpecialistController> {
   const SpecialistListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Specialists'),
+        title: Text(AppStrings.specialists),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: ReusableTextField(
+              labelText: AppStrings.searchSpecialistHint,
+              controller: controller.searchController,
+              keyboardType: TextInputType.text,
+              suffixIcon: const Icon(Icons.search, color: AppColors.lightText),
               onChanged: controller.filterSpecialists,
-              decoration: const InputDecoration(
-                labelText: 'Search by name or specialization',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
             ),
           ),
         ),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(color: AppColors.primaryPurple),
+          );
         } else if (controller.errorMessage.value.isNotEmpty) {
-          return Center(child: Text('Error: ${controller.errorMessage.value}'));
-        } else if (controller.filteredSpecialists.isEmpty &&
+          return Center(
+            child: Text(
+              '${AppStrings.error}: ${controller.errorMessage.value}',
+              style: TextStyle(color: AppColors.darkText),
+            ),
+          );
+        } else if (controller.specialistsByCategory.isEmpty &&
             controller.searchQuery.isNotEmpty) {
           return const Center(
-            child: Text('No specialists found matching your search.'),
+            child: Text(
+              AppStrings.noSpecialistsFoundSearch,
+              textAlign: TextAlign.center,
+            ),
           );
-        } else if (controller.filteredSpecialists.isEmpty &&
+        } else if (controller.specialistsByCategory.isEmpty &&
             controller.searchQuery.isEmpty &&
             controller.specialistsByCategory.isEmpty) {
-          return const Center(child: Text('No specialists available.'));
+          return const Center(
+            child: Text(
+              AppStrings.noSpecialistsAvailable,
+              textAlign: TextAlign.center,
+            ),
+          );
         } else {
           return ListView.builder(
             itemCount: controller.specialistsByCategory.keys.length,
@@ -58,73 +74,30 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       specialization,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                      style: AppTextStyles.subHeading.copyWith(
+                        color: AppColors.primaryPurple,
                       ),
                     ),
                   ),
-                  ListView.builder(
+                  GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.8,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                        ),
                     itemCount: specialistsInCategory.length,
-                    itemBuilder: (context, specialistIndex) {
-                      final specialist = specialistsInCategory[specialistIndex];
-                      return Card(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 8.0,
-                        ),
-                        child: ListTile(
-                          title: Text(specialist.name),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(specialist.specialization),
-                              if (specialist.availableDays.isNotEmpty)
-                                Text(
-                                  'Available: ${specialist.availableDays.entries.map((e) => '${e.key} (${e.value.join(', ')})').join(', ')}',
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              if (specialist.bio != null &&
-                                  specialist.bio!.isNotEmpty)
-                                Text(
-                                  specialist.bio!,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey[600],
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                            ],
-                          ),
-                          onTap:
-                              () => controller.getSpecialistDetails(
-                                specialist.id,
-                              ),
-                          trailing: ElevatedButton(
-                            onPressed: () {
-                              // Implement your booking logic here
-                              print(
-                                'Book button tapped for ${specialist.name}',
-                              );
-                              Get.find<AuthController>().logout(); // Access AuthController directly here
-
-                              // Get.toNamed(
-                              //   AppRoutes.booking,
-                              //   arguments: specialist,
-                              // );
-                              // You might want to navigate to a booking screen
-                              // and pass the specialist's information.
-                            },
-                            child: const Text('Book'),
-                          ),
-                        ),
-                      );
+                    itemBuilder: (context, index) {
+                      final specialist = specialistsInCategory[index];
+                      return SpecialistGridItem(specialist: specialist);
                     },
                   ),
-                  const Divider(),
+                  const SizedBox(height: 16.0),
+                  // Add some spacing between categories
                 ],
               );
             },

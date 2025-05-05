@@ -8,6 +8,7 @@ class ReusableTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final ValueChanged<String>? onChanged; // Add the onChanged parameter
 
   const ReusableTextField({
     super.key,
@@ -16,6 +17,8 @@ class ReusableTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.keyboardType,
+    this.onChanged, // Include it in the constructor
+
   });
 
   @override
@@ -25,6 +28,7 @@ class ReusableTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        onChanged: onChanged, // Pass the onChanged callback to the TextField
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: labelText,

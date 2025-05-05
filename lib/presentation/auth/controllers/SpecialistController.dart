@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart'
     show Specialist, createDummySpecialistList, specialistLists;
@@ -18,13 +19,15 @@ class SpecialistController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
   final RxString searchQuery = ''.obs;
-  final RxMap<String, List<Specialist>> specialistsByCategory =
-      <String, List<Specialist>>{}.obs;
+  final RxMap<String, List<Specialist>> specialistsByCategory = <String, List<Specialist>>{}.obs;
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void onInit() {
-    // submitSpecialists();
     fetchSpecialists();
+    searchController.addListener(() {
+      filterSpecialists(searchController.text);
+    });
     super.onInit();
   }
 
@@ -43,22 +46,6 @@ class SpecialistController extends GetxController {
     }
   }
 
-  Future<void> submitSpecialists() async {
-    final FirebaseFirestore db = FirebaseFirestore.instance;
-    errorMessage.value = '';
-    isLoading.value = true;
-    for (var value in specialistLists) {
-      await db
-          .collection("Specialists")
-          .doc(value.id)
-          .set(value.toFirestore())
-          .onError(
-            (e, _) => print("Error writing document for ${value.name}: $e"),
-          );
-    }
-
-    isLoading.value = false;
-  }
 
   Future<void> getSpecialistDetails(String id) async {
     isLoading.value = true;
@@ -99,5 +86,11 @@ class SpecialistController extends GetxController {
       }
       specialistsByCategory[specialist.specialization]!.add(specialist);
     }
+  }
+
+  @override
+  void onClose() {
+    searchController.dispose(); // Dispose of the searchController
+    super.onClose();
   }
 }
