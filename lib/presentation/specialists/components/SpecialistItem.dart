@@ -4,10 +4,10 @@ import 'package:service_reservation_app/presentation/auth/auth_controller.dart';
 import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart';
 import 'package:service_reservation_app/routes/app_routes.dart';
 
-import '../../data/models/specialist_model.dart';
-import '../../utils/appColors/AppColors.dart';
-import '../../utils/appStrings/AppStrings.dart';
-import '../../utils/appTextStyle/AppTextStyles.dart';
+import '../../../data/models/specialist_model.dart';
+import '../../../utils/appColors/AppColors.dart';
+import '../../../utils/appStrings/AppStrings.dart';
+import '../../../utils/appTextStyle/AppTextStyles.dart';
 
 class SpecialistGridItem extends StatelessWidget {
   final Specialist specialist;
