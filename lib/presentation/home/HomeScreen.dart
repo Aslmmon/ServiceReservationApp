@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:service_reservation_app/presentation/appointments/appointments_screen.dart'
     show MyAppointmentsScreen;
 import 'package:service_reservation_app/presentation/specialists/specialist_list_screen.dart'
     show SpecialistListScreen;
-
-import '../appointments/appointments_controller.dart';
+import 'package:service_reservation_app/utils/appStrings/AppStrings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,11 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            label: 'Specialists',
+            label: AppStrings.specialists,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
-            label: 'Reservations',
+            label: AppStrings.reservations,
           ),
         ],
         currentIndex: _selectedIndex,

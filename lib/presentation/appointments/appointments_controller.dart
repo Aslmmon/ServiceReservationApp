@@ -8,6 +8,8 @@ import '../../domain/use_cases/appointment/GetUserAppointmentsUseCase.dart';
 class MyAppointmentsController extends GetxController {
   final GetUserAppointmentsUseCase _getUserAppointmentsUseCase = Get.find();
   final CancelAppointmentUseCase _cancelAppointmentUseCase = Get.find();
+
+  /// @TODO : move FirebaseAuth to data source Layer
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final RxList<Appointment> appointments = <Appointment>[].obs;

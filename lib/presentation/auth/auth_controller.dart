@@ -11,13 +11,11 @@ class AuthController extends GetxController {
   final RegisterUserUseCase _registerUserUseCase = Get.find();
   final LoginUserUseCase _loginUserUseCase = Get.find();
   final LogoutUserUseCase _logoutUserUseCase = Get.find();
-
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> register() async {
     isLoading.value = true;

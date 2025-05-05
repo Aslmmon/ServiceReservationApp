@@ -14,6 +14,7 @@ class AppStrings {
   static const String loggingInButtonText = 'Logging In...';
   static const String noAccountQuestion = 'Don\'t have an account?';
   static const String signUpLink = 'Sign Up';
+  static const String reservations = 'Reservations';
 
   static const String specialists = 'Specialists';
   static const String searchSpecialistHint = 'Search by name or specialization';
