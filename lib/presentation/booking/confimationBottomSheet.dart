@@ -35,6 +35,7 @@ Widget buildConfirmationBottomSheet(
               ? DateFormat('EEEE, MMMM d, y').format(selectedDate!)
               : AppStrings.loading,
         ),
+
         _buildInfoRow(
           AppStrings.time,
           selectedTimeFormatted ?? AppStrings.loading,
@@ -51,13 +52,8 @@ Widget buildConfirmationBottomSheet(
                 print(
                   'Confirming booking for Specialist ID: $specialistId on ${selectedDate.toLocal()} at $selectedTimeFormatted',
                 );
-                onBookingClicked();
+                //  onBookingClicked();
                 Get.back(); // Close the bottom sheet
-                _showBookingSuccessSnackbar(
-                  context,
-                  selectedDate,
-                  selectedTimeFormatted,
-                );
               } else {
                 Get.snackbar(
                   AppStrings.error,
@@ -79,7 +75,7 @@ Widget buildConfirmationBottomSheet(
             },
             child: Text(
               AppStrings.cancel,
-              style: AppTextStyles.heading.copyWith(color: Colors.grey),
+              style: AppTextStyles.subHeading.copyWith(color: Colors.grey),
             ),
           ),
         ),
@@ -93,41 +89,23 @@ Widget _buildInfoRow(String label, String value) {
     padding: const EdgeInsets.symmetric(vertical: 4.0),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           label,
-          style: AppTextStyles.heading.copyWith(color: AppColors.darkText),
+          style: AppTextStyles.subHeading.copyWith(color: AppColors.darkText),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
             value,
-            style: AppTextStyles.subHeading.copyWith(color: AppColors.darkText),
+            style: AppTextStyles.subHeading.copyWith(
+              color: AppColors.primaryPurple,
+            ),
           ),
         ),
       ],
     ),
-  );
-}
-
-void _showBookingSuccessSnackbar(
-  BuildContext context,
-  DateTime? date,
-  String? time,
-) {
-  final formattedDateTime =
-      date != null && time != null
-          ? DateFormat('EEEE, MMMM d, y \'at\' h:mm a').format(
-            DateTime.parse('${DateFormat('yyyy-MM-dd').format(date)} $time'),
-          )
-          : 'N/A';
-  Get.snackbar(
-    AppStrings.bookingSuccessful,
-    '${AppStrings.yourAppointmentIsConfirmed}\n$formattedDateTime',
-    snackPosition: SnackPosition.BOTTOM,
-    backgroundColor: AppColors.darkText.withOpacity(0.8),
-    colorText: Colors.white,
-    duration: const Duration(seconds: 3),
   );
 }
 
