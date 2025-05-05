@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/RegisterUserUseCase.dart'
     show RegisterUserUseCase;
-import '../../../../domain/use_cases/auth/login_user_use_case.dart';
-import '../../../../routes/app_routes.dart';
+import '../../../domain/use_cases/auth/login_user_use_case.dart';
+import '../../../routes/app_routes.dart';
 
 class AuthController extends GetxController {
   final RegisterUserUseCase _registerUserUseCase = Get.find();

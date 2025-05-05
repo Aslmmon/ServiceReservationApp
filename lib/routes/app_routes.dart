@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart'
     show Specialist;
-import 'package:service_reservation_app/presentation/auth/bindings/auth_binding.dart'
-    show AuthBinding;
 import 'package:service_reservation_app/presentation/auth/login_screen.dart'
     show LoginScreen;
 import 'package:service_reservation_app/presentation/auth/register_screen.dart'
@@ -10,12 +8,13 @@ import 'package:service_reservation_app/presentation/auth/register_screen.dart'
 import 'package:service_reservation_app/presentation/home/HomeScreen.dart';
 import 'package:service_reservation_app/presentation/splash/SplashScreen.dart';
 import '../main.dart';
-import '../presentation/appointments/my_appointments_screen.dart'
+import '../presentation/appointments/appointments_screen.dart'
     show MyAppointmentsScreen;
-import '../presentation/auth/bindings/appointment_binding.dart'
-    show AppointmentBinding;
-import '../presentation/auth/bindings/booking_binding.dart' show BookingBinding;
-import '../presentation/auth/bindings/specialist_binding.dart';
+
+import '../presentation/bindings/appointment_binding.dart';
+import '../presentation/bindings/auth_binding.dart';
+import '../presentation/bindings/booking_binding.dart';
+import '../presentation/bindings/specialist_binding.dart';
 import '../presentation/booking/booking_screen.dart' show BookingScreen;
 import '../presentation/specialists/specialist_detail_screen.dart'
     show SpecialistDetailScreen;
@@ -35,9 +34,7 @@ class AppRoutes {
   static final pages = [
     GetPage(name: splash, page: () => const Splashscreen()),
     // Add the loading screen route
-    GetPage(name: login, page: () => LoginScreen(),
-         binding: AuthBinding()
-    ),
+    GetPage(name: login, page: () => LoginScreen(), binding: AuthBinding()),
     GetPage(
       name: register,
       page: () => RegisterScreen(),

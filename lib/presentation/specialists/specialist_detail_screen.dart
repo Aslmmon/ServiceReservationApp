@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../auth/controllers/SpecialistController.dart' show SpecialistController;
+import 'specialists_controller.dart' show SpecialistController;
 
 class SpecialistDetailScreen extends GetView<SpecialistController> {
   const SpecialistDetailScreen({super.key});

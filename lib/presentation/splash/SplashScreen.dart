@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:service_reservation_app/routes/app_routes.dart';
-
 import '../../routes/app_navigation.dart';
 
 class Splashscreen extends StatefulWidget {

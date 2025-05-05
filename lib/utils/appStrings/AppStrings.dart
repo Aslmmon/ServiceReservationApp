@@ -48,4 +48,14 @@ class AppStrings {
   static const String yourAppointmentIsConfirmed = 'Your appointment is confirmed for:';
   static const String ok = 'OK';
   static const String cancel = 'Cancel';
+
+
+
+  static const String myAppointments = 'My Appointments';
+  static const String noAppointments = 'You have no upcoming appointments.';
+  static const String specialistName = 'Specialist:';
+  static const String appointmentDate = 'Date:';
+  static const String appointmentTime = 'Time:';
+  static const String cancelAppointment = 'Cancel';
+  static const String cancelling = 'Cancelling...';
 }

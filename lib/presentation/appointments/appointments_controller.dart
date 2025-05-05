@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
 
-import '../../../data/data_source/firebase_user_data_source.dart'
-    show FirebaseUserRepository;
-import '../../../data/models/appointment_model.dart' show Appointment;
-import '../../../domain/use_cases/appointment/CancelAppointmentUseCase.dart'
-    show CancelAppointmentUseCase;
-import '../../../domain/use_cases/appointment/GetUserAppointmentsUseCase.dart'
-    show GetUserAppointmentsUseCase;
+import '../../../data/data_source/firebase_user_data_source.dart';
+import '../../../data/models/appointment_model.dart';
+import '../../../domain/use_cases/appointment/CancelAppointmentUseCase.dart';
+import '../../../domain/use_cases/appointment/GetUserAppointmentsUseCase.dart';
 
 class MyAppointmentsController extends GetxController {
   final GetUserAppointmentsUseCase _getUserAppointmentsUseCase = Get.find();

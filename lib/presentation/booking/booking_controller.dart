@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../domain/use_cases/booking/book_appointment_use_case.dart';
+import '../../domain/use_cases/booking/book_appointment_use_case.dart';
 
 class BookingController extends GetxController {
   final BookAppointmentUseCase _bookAppointmentUseCase = Get.find();

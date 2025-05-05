@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:service_reservation_app/presentation/auth/controllers/auth_controller.dart';
-import 'package:service_reservation_app/presentation/auth/controllers/SpecialistController.dart';
+import 'package:service_reservation_app/presentation/auth/auth_controller.dart';
+import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart';
 import 'package:service_reservation_app/routes/app_routes.dart';
 
 import '../../data/models/specialist_model.dart';

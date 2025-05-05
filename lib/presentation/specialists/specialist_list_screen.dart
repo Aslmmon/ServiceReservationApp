@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:service_reservation_app/presentation/auth/controllers/SpecialistController.dart'
+import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart'
     show SpecialistController;
 import 'package:service_reservation_app/presentation/specialists/SpecialistItem.dart';
 import '../../utils/appColors/AppColors.dart';
