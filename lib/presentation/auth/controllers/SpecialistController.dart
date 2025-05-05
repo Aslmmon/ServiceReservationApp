@@ -19,7 +19,8 @@ class SpecialistController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
   final RxString searchQuery = ''.obs;
-  final RxMap<String, List<Specialist>> specialistsByCategory = <String, List<Specialist>>{}.obs;
+  final RxMap<String, List<Specialist>> specialistsByCategory =
+      <String, List<Specialist>>{}.obs;
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -46,6 +47,23 @@ class SpecialistController extends GetxController {
     }
   }
 
+  Future<void> submitSpecialists() async {
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    errorMessage.value = '';
+    isLoading.value = true;
+    for (var value in specialistLists) {
+      await db
+          .collection("Specialists")
+          .doc(value.id)
+          .set(value.toFirestore())
+          .onError(
+            (e, _) =>
+                print("Error writing document for ${value.name}: $e"),
+          );
+    }
+
+    isLoading.value = false;
+  }
 
   Future<void> getSpecialistDetails(String id) async {
     isLoading.value = true;

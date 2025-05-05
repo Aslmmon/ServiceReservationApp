@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart'; // For date formatting
+import 'package:intl/intl.dart';
+import '../../utils/appColors/AppColors.dart';
+import '../../utils/appStrings/AppStrings.dart';
+import '../../utils/appTextStyle/AppTextStyles.dart';
+import '../../utils/components/AppButton.dart'; // Assuming you have this
 
 Widget buildConfirmationBottomSheet(
   BuildContext context,
@@ -17,66 +21,117 @@ Widget buildConfirmationBottomSheet(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Review Your Booking',
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          AppStrings.reviewBooking,
+          style: AppTextStyles.heading.copyWith(color: AppColors.darkText),
         ),
         const SizedBox(height: 16),
-        Text(
-          'Specialist: ${specialistName ?? 'N/A'}',
-          style: const TextStyle(fontSize: 16),
+        _buildInfoRow(
+          AppStrings.specialist,
+          specialistName ?? AppStrings.loading,
         ),
-        Text(
-          'Date: ${selectedDate != null ? DateFormat.yMMMMd().format(selectedDate!) : 'N/A'}',
-          style: const TextStyle(fontSize: 16),
+        _buildInfoRow(
+          AppStrings.date,
+          selectedDate != null
+              ? DateFormat('EEEE, MMMM d, y').format(selectedDate!)
+              : AppStrings.loading,
         ),
-        Text(
-          'Time: ${selectedTimeFormatted ?? 'N/A'}',
-          style: const TextStyle(fontSize: 16),
+        _buildInfoRow(
+          AppStrings.time,
+          selectedTimeFormatted ?? AppStrings.loading,
         ),
         const SizedBox(height: 24),
         SizedBox(
           width: double.infinity,
-          child: ElevatedButton(
+          child: ReusableButton(
+            text: AppStrings.confirmBooking,
             onPressed: () {
               if (specialistId != null &&
                   selectedDate != null &&
                   selectedTimeFormatted != null) {
-                // Implement your booking submission logic here
                 print(
                   'Confirming booking for Specialist ID: $specialistId on ${selectedDate.toLocal()} at $selectedTimeFormatted',
                 );
-
                 onBookingClicked();
-                // After successful booking, you might want to:
-                // 1. Show a success message (Snackbar, Dialog).
-                // 2. Navigate to a confirmation screen or back to the home screen.
                 Get.back(); // Close the bottom sheet
-                // Optionally, navigate to a success screen: Get.toNamed(AppRoutes.bookingSuccess);
+                _showBookingSuccessSnackbar(
+                  context,
+                  selectedDate,
+                  selectedTimeFormatted,
+                );
               } else {
                 Get.snackbar(
-                  'Error',
-                  'Missing booking details. Please try again.',
+                  AppStrings.error,
+                  '${AppStrings.error}: Missing booking details. Please try again.',
                   snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: AppColors.darkText.withOpacity(0.8),
+                  colorText: Colors.white,
                 );
               }
             },
-            child: const Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Text('Confirm Booking', style: TextStyle(fontSize: 18)),
-            ),
           ),
         ),
         const SizedBox(height: 8),
-        TextButton(
-          onPressed: () {
-            Get.back(); // Close the bottom sheet
-          },
-          child: const Text(
-            'Cancel',
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () {
+              Get.back(); // Close the bottom sheet
+            },
+            child: Text(
+              AppStrings.cancel,
+              style: AppTextStyles.heading.copyWith(color: Colors.grey),
+            ),
           ),
         ),
       ],
     ),
   );
+}
+
+Widget _buildInfoRow(String label, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: AppTextStyles.heading.copyWith(color: AppColors.darkText),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            value,
+            style: AppTextStyles.subHeading.copyWith(color: AppColors.darkText),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+void _showBookingSuccessSnackbar(
+  BuildContext context,
+  DateTime? date,
+  String? time,
+) {
+  final formattedDateTime =
+      date != null && time != null
+          ? DateFormat('EEEE, MMMM d, y \'at\' h:mm a').format(
+            DateTime.parse('${DateFormat('yyyy-MM-dd').format(date)} $time'),
+          )
+          : 'N/A';
+  Get.snackbar(
+    AppStrings.bookingSuccessful,
+    '${AppStrings.yourAppointmentIsConfirmed}\n$formattedDateTime',
+    snackPosition: SnackPosition.BOTTOM,
+    backgroundColor: AppColors.darkText.withOpacity(0.8),
+    colorText: Colors.white,
+    duration: const Duration(seconds: 3),
+  );
+}
+
+// Add this to your AppStrings file
+extension AppStringsExtension on AppStrings {
+  static const String cancel = 'Cancel';
 }

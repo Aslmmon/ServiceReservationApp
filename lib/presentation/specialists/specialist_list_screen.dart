@@ -67,38 +67,42 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                   controller.specialistsByCategory.keys.toList()[categoryIndex];
               final specialistsInCategory =
                   controller.specialistsByCategory[specialization]!;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      specialization,
-                      style: AppTextStyles.subHeading.copyWith(
-                        color: AppColors.primaryPurple,
+              return AnimatedOpacity(
+                duration: const Duration(milliseconds: 500),
+                opacity: 1.0,
+                // You might want to control this based on some state
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        specialization,
+                        style: AppTextStyles.subHeading.copyWith(
+                          color: AppColors.primaryPurple,
+                        ),
                       ),
                     ),
-                  ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.8,
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                        ),
-                    itemCount: specialistsInCategory.length,
-                    itemBuilder: (context, index) {
-                      final specialist = specialistsInCategory[index];
-                      return SpecialistGridItem(specialist: specialist);
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                  // Add some spacing between categories
-                ],
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.8,
+                            crossAxisSpacing: 8.0,
+                            mainAxisSpacing: 8.0,
+                          ),
+                      itemCount: specialistsInCategory.length,
+                      itemBuilder: (context, index) {
+                        final specialist = specialistsInCategory[index];
+                        return SpecialistGridItem(specialist: specialist);
+                      },
+                    ),
+                    const SizedBox(height: 16.0),
+                  ],
+                ),
               );
             },
           );

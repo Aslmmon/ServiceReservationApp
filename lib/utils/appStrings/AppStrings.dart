@@ -15,14 +15,10 @@ class AppStrings {
   static const String noAccountQuestion = 'Don\'t have an account?';
   static const String signUpLink = 'Sign Up';
 
-
-
   static const String specialists = 'Specialists';
   static const String searchSpecialistHint = 'Search by name or specialization';
   static const String noSpecialistsFoundSearch = 'No specialists found matching your search.';
   static const String noSpecialistsAvailable = 'No specialists available.';
-
-
 
   static const String helloBeautiful = 'Hello Beautiful';
   static const String signUp = 'Sign Up';
@@ -31,4 +27,25 @@ class AppStrings {
   static const String signingUpButtonText = 'Signing Up...';
   static const String alreadyHaveAccountQuestion = 'Already have an account?';
   static const String loginLink = 'Login';
+
+  // Booking Screen
+  static const String bookAppointment = 'Book Appointment';
+  static const String bookWithSpecialist = 'Book with';
+  static const String selectDate = 'Select Date:';
+  static const String selectTime = 'Select Time:';
+  static const String pleaseSelectDateFirst = 'Please select a date first.';
+  static const String noAvailableTimes = 'No available times for the selected date.';
+  static const String selectedTime = 'Selected Time:';
+  static const String nextReviewConfirm = 'Next: Review and Confirm';
+
+  // Confirmation Bottom Sheet
+  static const String reviewBooking = 'Review Your Booking';
+  static const String specialist = 'Specialist:';
+  static const String date = 'Date:';
+  static const String time = 'Time:';
+  static const String confirmBooking = 'Confirm Booking';
+  static const String bookingSuccessful = 'Booking Successful!';
+  static const String yourAppointmentIsConfirmed = 'Your appointment is confirmed for:';
+  static const String ok = 'OK';
+  static const String cancel = 'Cancel';
 }
