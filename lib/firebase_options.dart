@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
-import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -17,60 +17,55 @@ class DefaultFirebaseOptions {
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        throw UnsupportedError("");
       default:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions are not supported for this platform.',
-        );
+        throw UnsupportedError("");
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCZ6oLhKRDmIATTddumzCkc5mqE3ad4fxU',
-    appId: '1:636235891170:web:b6efb797ec8a1bb4ebb9bb',
-    messagingSenderId: '636235891170',
-    projectId: 'servicereservationapp',
-    authDomain: 'servicereservationapp.firebaseapp.com',
-    storageBucket: 'servicereservationapp.firebasestorage.app',
-    measurementId: 'G-JP66Y36S9T',
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WEB']!,
+    appId: dotenv.env['FIREBASE_APP_ID_WEB']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+    authDomain: dotenv.env['FIREBASE_AUTH_DOMAIN']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
+    measurementId: dotenv.env['FIREBASE_MEASUREMENT_ID']!,
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDeHL82vdrWbz9k6oBepbjl18biumcqS-w',
-    appId: '1:636235891170:android:54e679fa16c8d952ebb9bb',
-    messagingSenderId: '636235891170',
-    projectId: 'servicereservationapp',
-    storageBucket: 'servicereservationapp.firebasestorage.app',
+  static  FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID']!,
+    appId: dotenv.env['FIREBASE_APP_ID_ANDROID']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAFlVVc7v6Zc48MNi9Py9hei0eo-xQqB0Q',
-    appId: '1:636235891170:ios:14bf41d2691cbffdebb9bb',
-    messagingSenderId: '636235891170',
-    projectId: 'servicereservationapp',
-    storageBucket: 'servicereservationapp.firebasestorage.app',
-    iosBundleId: 'com.aslmmovic.serviceReservationApp',
+  static  FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_IOS']!,
+    appId: dotenv.env['FIREBASE_APP_ID_IOS']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
+    iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAFlVVc7v6Zc48MNi9Py9hei0eo-xQqB0Q',
-    appId: '1:636235891170:ios:14bf41d2691cbffdebb9bb',
-    messagingSenderId: '636235891170',
-    projectId: 'servicereservationapp',
-    storageBucket: 'servicereservationapp.firebasestorage.app',
-    iosBundleId: 'com.aslmmovic.serviceReservationApp',
+  static  FirebaseOptions macos = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_MACOS']!,
+    appId: dotenv.env['FIREBASE_APP_ID_MACOS']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
+    iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID_MACOS']!, // Adjust key if needed
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCZ6oLhKRDmIATTddumzCkc5mqE3ad4fxU',
-    appId: '1:636235891170:web:93279149641b74e1ebb9bb',
-    messagingSenderId: '636235891170',
-    projectId: 'servicereservationapp',
-    authDomain: 'servicereservationapp.firebaseapp.com',
-    storageBucket: 'servicereservationapp.firebasestorage.app',
-    measurementId: 'G-1SG0D9E6WX',
+  static  FirebaseOptions windows = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WINDOWS']!,
+    appId: dotenv.env['FIREBASE_APP_ID_WINDOWS']!,
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+    authDomain: dotenv.env['FIREBASE_AUTH_DOMAIN_WINDOWS']!, // Adjust key if needed
+    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET_WINDOWS']!, // Adjust key if needed
+    measurementId: dotenv.env['FIREBASE_MEASUREMENT_ID_WINDOWS']!, // Adjust key if needed
   );
 }

@@ -1,9 +1,7 @@
-import 'package:firebase_core/firebase_core.dart' show Firebase;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart'
-    show GetMaterialApp;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_reservation_app/presentation/bindings/auth_binding.dart';
 import 'package:service_reservation_app/routes/app_navigation.dart';
@@ -14,6 +12,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(); // Load the .env file
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Get.putAsync(() async => AppNavigation());
   runApp(const MyApp());
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: AppStrings.appName,
+      debugShowCheckedModeBanner: false,
       initialBinding: AuthBinding(),
       theme: ThemeData(
         primaryColor: AppColors.primaryPurple,
