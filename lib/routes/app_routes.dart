@@ -38,7 +38,7 @@ class AppRoutes {
     GetPage(
       name: specialistList,
       page: () => const SpecialistListScreen(),
-      binding: SpecialistBinding()
+      binding: SpecialistBinding(),
     ),
     GetPage(
       name: booking,
@@ -49,11 +49,13 @@ class AppRoutes {
     GetPage(
       name: myAppointments,
       page: () => const MyAppointmentsScreen(),
-      binding: AppointmentBinding()
+      binding: AppointmentBinding(),
     ),
     GetPage(
       name: home,
       page: () => const HomeScreen(),
-    bindings: [SpecialistBinding(),AppointmentBinding()]),
+
+      bindings: [SpecialistBinding(), AppointmentBinding()],
+    ),
   ];
 }

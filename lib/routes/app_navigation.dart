@@ -6,13 +6,8 @@ class AppNavigation extends GetxService {
   static AppNavigation get to => Get.find();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final RxBool _isFirstLaunch = true.obs;
 
   Future<void> handleInitialNavigation() async {
-    if (!_isFirstLaunch.value) {
-      return;
-    }
-    _isFirstLaunch.value = false;
     final User? initialUser = _auth.currentUser;
     if (initialUser == null) {
       if (Get.currentRoute != AppRoutes.login &&
@@ -26,7 +21,9 @@ class AppNavigation extends GetxService {
     }
   }
 
-  void goToHome() => Get.offAllNamed(AppRoutes.home);
+  void goToHome() => Get.offAllNamed(
+    AppRoutes.home,
+  );
 
   void goToLogin() => Get.offAllNamed(AppRoutes.login);
 }

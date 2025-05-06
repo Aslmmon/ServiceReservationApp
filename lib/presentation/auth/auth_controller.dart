@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/RegisterUserUseCase.dart'
     show RegisterUserUseCase;
-import 'package:service_reservation_app/domain/use_cases/auth/logout_user_use_case.dart';
 import '../../../domain/use_cases/auth/login_user_use_case.dart';
 import '../../../routes/app_routes.dart';
 
 class AuthController extends GetxController {
   final RegisterUserUseCase _registerUserUseCase = Get.find();
   final LoginUserUseCase _loginUserUseCase = Get.find();
-  final LogoutUserUseCase _logoutUserUseCase = Get.find();
   late final TextEditingController nameController = TextEditingController();
   late final TextEditingController emailController = TextEditingController();
   late final TextEditingController passwordController = TextEditingController();
