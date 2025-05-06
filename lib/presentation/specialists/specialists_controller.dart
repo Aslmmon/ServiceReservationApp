@@ -8,9 +8,13 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_all_sp
 import 'package:service_reservation_app/domain/use_cases/specialities/get_specialist_by_id_use_case.dart'
     show GetSpecialistByIdUseCase;
 
+import '../../domain/use_cases/auth/logout_user_use_case.dart';
+import '../../routes/app_routes.dart';
+
 class SpecialistController extends GetxController {
   final GetAllSpecialistsUseCase _getAllSpecialistsUseCase = Get.find();
   final GetSpecialistByIdUseCase _getSpecialistByIdUseCase = Get.find();
+  final LogoutUserUseCase _logoutUserUseCase = Get.find();
 
   final RxList<Specialist> _allSpecialists = <Specialist>[].obs;
   final RxList<Specialist> filteredSpecialists = <Specialist>[].obs;
@@ -62,6 +66,17 @@ class SpecialistController extends GetxController {
     }
 
     isLoading.value = false;
+  }
+
+  Future<void> logout() async {
+    try {
+      _logoutUserUseCase.execute().whenComplete(() {
+        Get.offAllNamed(AppRoutes.login);
+      });
+
+    } catch (e) {
+      print('Error signing out: $e');
+    }
   }
 
   Future<void> getSpecialistDetails(String id) async {

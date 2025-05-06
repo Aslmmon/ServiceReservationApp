@@ -17,9 +17,7 @@ class SpecialistGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authController = Get.find<AuthController>();
     final specialistController = Get.find<SpecialistController>();
-
     return Card(
       color: Colors.white,
       elevation: 2.0,

@@ -8,11 +8,11 @@ class AvailableTimeChips extends StatelessWidget {
   final ValueChanged<String> onTimeSelected;
 
   const AvailableTimeChips({
-    Key? key,
+    super.key,
     required this.availableTimes,
     this.selectedTime,
     required this.onTimeSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

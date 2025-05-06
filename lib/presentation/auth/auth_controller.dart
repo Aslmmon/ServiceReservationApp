@@ -11,9 +11,9 @@ class AuthController extends GetxController {
   final RegisterUserUseCase _registerUserUseCase = Get.find();
   final LoginUserUseCase _loginUserUseCase = Get.find();
   final LogoutUserUseCase _logoutUserUseCase = Get.find();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  late final TextEditingController nameController = TextEditingController();
+  late final TextEditingController emailController = TextEditingController();
+  late final TextEditingController passwordController = TextEditingController();
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
 
@@ -47,16 +47,6 @@ class AuthController extends GetxController {
       Get.offAllNamed(AppRoutes.home);
     } else {
       errorMessage.value = 'Login failed. Invalid email or password.';
-    }
-  }
-
-  Future<void> logout() async {
-    try {
-      _logoutUserUseCase.execute().whenComplete(() {
-        Get.offAllNamed(AppRoutes.login);
-      });
-    } catch (e) {
-      print('Error signing out: $e');
     }
   }
 

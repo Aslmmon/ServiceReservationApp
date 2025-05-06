@@ -10,6 +10,8 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_specia
 import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart'
     show SpecialistController;
 
+import '../../domain/use_cases/auth/logout_user_use_case.dart';
+
 
 class SpecialistBinding extends Bindings {
   @override
@@ -22,5 +24,10 @@ class SpecialistBinding extends Bindings {
       () => GetSpecialistByIdUseCase(specialistRepository: Get.find()),
     );
     Get.lazyPut(() => SpecialistController());
+
+    Get.lazyPut(
+          () => LogoutUserUseCase(userRepository: Get.find()),
+      fenix: true,
+    );
   }
 }

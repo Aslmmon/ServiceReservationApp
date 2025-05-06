@@ -16,6 +16,24 @@ class SpecialistListScreen extends GetView<SpecialistController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppStrings.specialists),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'sign_out') {
+                controller.logout(); // Assuming you have a signOut method in your controller
+              }
+
+            },
+            itemBuilder:
+                (BuildContext context) => <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: 'sign_out',
+                    child: Text(AppStrings.logOut),
+                  ),
+                ],
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60.0),
           child: Padding(

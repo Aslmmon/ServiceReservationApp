@@ -13,7 +13,6 @@ class AppNavigation extends GetxService {
       return;
     }
     _isFirstLaunch.value = false;
-    // Check initial state immediately on service initialization
     final User? initialUser = _auth.currentUser;
     if (initialUser == null) {
       if (Get.currentRoute != AppRoutes.login &&
