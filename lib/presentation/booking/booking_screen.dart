@@ -115,7 +115,7 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8.0),
         child: _buildNextButton(),
       ),
     );
@@ -204,7 +204,6 @@ class _BookingScreenState extends State<BookingScreen> {
     return SizedBox(
       // To make the button take full width
       width: double.infinity,
-      height: 40,
       child: ReusableButton(
         text: AppStrings.nextReviewConfirm,
         onPressed: () {
