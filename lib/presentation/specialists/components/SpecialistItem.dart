@@ -52,6 +52,7 @@ class SpecialistGridItem extends StatelessWidget {
               const SizedBox(height: 8.0),
               ReusableButton(
                 text: AppStrings.book,
+
                 onPressed:
                     () => Get.toNamed(AppRoutes.booking, arguments: specialist),
               ),

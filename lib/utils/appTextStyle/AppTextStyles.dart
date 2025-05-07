@@ -5,7 +5,7 @@ import '../appColors/AppColors.dart';
 
 class AppTextStyles {
   static TextStyle heading = GoogleFonts.montserrat(
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: FontWeight.bold,
     color: AppColors.darkText,
   );

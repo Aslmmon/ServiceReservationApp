@@ -22,6 +22,10 @@ class SpecialistListScreen extends GetView<SpecialistController> {
         centerTitle: true,
         forceMaterialTransparency: true,
         title: Text(AppStrings.specialists.tr),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Hero(tag: "1", child: Image.asset(AppAssets.logo)),
+        ),
         actions: [
           PopupMenuButton<String>(
             itemBuilder:
@@ -101,9 +105,7 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               child: Text(
                                 specialization.tr,
                                 // Assuming specialization might be localizable
-                                style: AppTextStyles.heading.copyWith(
-                                  color: AppColors.primaryPurple,
-                                ),
+                                style: AppTextStyles.heading,
                               ),
                             ),
                             GridView.builder(
@@ -114,10 +116,10 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               ),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
+                                    crossAxisCount: 2,
                                     childAspectRatio: 0.8,
-                                    crossAxisSpacing: 1.0,
-                                    mainAxisSpacing: 1.0,
+                                    crossAxisSpacing: 8.0,
+                                    mainAxisSpacing: 8.0,
                                   ),
                               itemCount: specialistsInCategory.length,
                               itemBuilder: (context, index) {
