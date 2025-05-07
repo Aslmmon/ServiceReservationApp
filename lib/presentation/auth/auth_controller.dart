@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/RegisterUserUseCase.dart'
     show RegisterUserUseCase;
 import 'package:service_reservation_app/presentation/auth/validators/AuthValidators.dart';
+import 'package:service_reservation_app/utils/appStrings/AppStrings.dart';
 import '../../../domain/use_cases/auth/login_user_use_case.dart';
 import '../../../routes/app_routes.dart';
 
@@ -37,7 +37,7 @@ class AuthController extends GetxController {
     if (result != null) {
       Get.offAllNamed(AppRoutes.home);
     } else {
-      errorMessage.value = 'Registration failed. Please try again.';
+      errorMessage.value = AppStrings.registrationFailed;
     }
   }
 
@@ -59,7 +59,7 @@ class AuthController extends GetxController {
     if (result != null) {
       Get.offAllNamed(AppRoutes.home);
     } else {
-      errorMessage.value = 'Login failed. Please try again.';
+      errorMessage.value = AppStrings.loginGenericError;
     }
   }
 
