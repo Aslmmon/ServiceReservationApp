@@ -15,6 +15,7 @@ class AppStrings {
   static const String noAccountQuestion = 'Don\'t have an account?';
   static const String signUpLink = 'Sign Up';
   static const String reservations = 'Reservations';
+
   static const String logOut = 'Sign Out';
 
   static const String specialists = 'Specialists';

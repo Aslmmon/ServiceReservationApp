@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart'
     show SpecialistController;
-import 'package:service_reservation_app/presentation/specialists/components/SpecialistItem.dart';
+import 'package:service_reservation_app/utils/components/AppTextField.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
-import '../../utils/components/AppTextField.dart';
+import 'components/SpecialistItem.dart';
+import 'components/empty_state.dart';
+import 'components/error_message.dart';
+import 'components/loading_indicator.dart'; // Added for reusable empty state
 
 class SpecialistListScreen extends GetView<SpecialistController> {
   const SpecialistListScreen({super.key});
@@ -15,31 +18,29 @@ class SpecialistListScreen extends GetView<SpecialistController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.specialists),
+        centerTitle: true,
+        scrolledUnderElevation: 0.0,
+        title: Text(AppStrings.specialists.tr),
         actions: [
           PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'sign_out') {
-                controller.logout(); // Assuming you have a signOut method in your controller
-              }
-
-            },
             itemBuilder:
                 (BuildContext context) => <PopupMenuEntry<String>>[
-                  const PopupMenuItem<String>(
+                  PopupMenuItem<String>(
                     value: 'sign_out',
-                    child: Text(AppStrings.logOut),
+                    onTap: () => controller.logout(),
+                    child: Text(AppStrings.logOut.tr),
                   ),
                 ],
             icon: const Icon(Icons.more_vert),
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(60.0),
+          preferredSize: const Size.fromHeight(100.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ReusableTextField(
-              labelText: AppStrings.searchSpecialistHint,
+              // Using the reusable component
+              labelText: AppStrings.searchSpecialistHint.tr,
               controller: controller.searchController,
               keyboardType: TextInputType.text,
               suffixIcon: const Icon(Icons.search, color: AppColors.lightText),
@@ -50,32 +51,29 @@ class SpecialistListScreen extends GetView<SpecialistController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return Center(
-            child: CircularProgressIndicator(color: AppColors.primaryPurple),
+          return const Center(
+            child: LoadingIndicator(), // Using the reusable loading indicator
           );
         } else if (controller.errorMessage.value.isNotEmpty) {
           return Center(
-            child: Text(
-              '${AppStrings.error}: ${controller.errorMessage.value}',
-              style: TextStyle(color: AppColors.darkText),
-            ),
+            child: ErrorMessage(
+              message:
+                  '${AppStrings.error.tr}: ${controller.errorMessage.value}',
+            ), // Reusable error
           );
         } else if (controller.specialistsByCategory.isEmpty &&
             controller.searchQuery.isNotEmpty) {
           return const Center(
-            child: Text(
-              AppStrings.noSpecialistsFoundSearch,
-              textAlign: TextAlign.center,
-            ),
+            child: EmptyState(
+              message: AppStrings.noSpecialistsFoundSearch,
+            ), // Reusable empty state
           );
         } else if (controller.specialistsByCategory.isEmpty &&
-            controller.searchQuery.isEmpty &&
-            controller.specialistsByCategory.isEmpty) {
+            controller.searchQuery.isEmpty) {
           return const Center(
-            child: Text(
-              AppStrings.noSpecialistsAvailable,
-              textAlign: TextAlign.center,
-            ),
+            child: EmptyState(
+              message: AppStrings.noSpecialistsAvailable,
+            ), // Reusable empty state
           );
         } else {
           return ListView.builder(
@@ -88,14 +86,14 @@ class SpecialistListScreen extends GetView<SpecialistController> {
               return AnimatedOpacity(
                 duration: const Duration(milliseconds: 500),
                 opacity: 1.0,
-                // You might want to control this based on some state
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        specialization,
+                        specialization.tr,
+                        // Assuming specialization might be localizable
                         style: AppTextStyles.subHeading.copyWith(
                           color: AppColors.primaryPurple,
                         ),
