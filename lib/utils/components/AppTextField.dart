@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../appColors/AppColors.dart';
 import '../appTextStyle/AppTextStyles.dart';
 
@@ -9,6 +10,8 @@ class ReusableTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onChanged; // Add the onChanged parameter
+  final int? maxLength; // Add maxLength
+  final List<TextInputFormatter>? inputFormatters; // Add inputFormatters
 
   const ReusableTextField({
     super.key,
@@ -17,8 +20,9 @@ class ReusableTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.keyboardType,
-    this.onChanged, // Include it in the constructor
-
+    this.onChanged,
+    this.maxLength = 20,
+    this.inputFormatters, // Include it in the constructor
   });
 
   @override
@@ -28,21 +32,35 @@ class ReusableTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
-        onChanged: onChanged, // Pass the onChanged callback to the TextField
+        onChanged: onChanged,
         keyboardType: keyboardType,
+        maxLength: maxLength,
+        inputFormatters: inputFormatters,
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: AppTextStyles.label,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide.none,
+            borderSide: BorderSide(
+              color:
+                  AppColors
+                      .primaryPurple, // Use provided color or default to grey
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color:
+                  Theme.of(
+                    context,
+                  ).primaryColor, // Use provided or primary color on focus
+            ),
           ),
           filled: true,
-          fillColor: AppColors.lightGrey,
+          fillColor: Colors.transparent,
           suffixIcon: suffixIcon,
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-            vertical: 14.0,
+            horizontal: 24.0,
+            vertical: 9.0,
           ),
         ),
       ),

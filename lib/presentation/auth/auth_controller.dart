@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/RegisterUserUseCase.dart'
     show RegisterUserUseCase;
+import 'package:service_reservation_app/presentation/auth/validators/AuthValidators.dart';
 import '../../../domain/use_cases/auth/login_user_use_case.dart';
 import '../../../routes/app_routes.dart';
 
@@ -16,35 +17,49 @@ class AuthController extends GetxController {
   final RxString errorMessage = ''.obs;
 
   Future<void> register() async {
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    final nameError = AuthValidators.validateName(name);
+    final emailError = AuthValidators.validateEmail(email);
+    final passwordError = AuthValidators.validatePassword(password);
+
+    if (nameError != null || emailError != null || passwordError != null) {
+      errorMessage.value = nameError ?? emailError ?? passwordError!;
+      return;
+    }
+
     isLoading.value = true;
     errorMessage.value = '';
-    final result = await _registerUserUseCase.execute(
-      nameController.text.trim(),
-      emailController.text.trim(),
-      passwordController.text.trim(),
-    );
+    final result = await _registerUserUseCase.execute(name, email, password);
     isLoading.value = false;
     if (result != null) {
-      // Registration successful, navigate to specialist list
       Get.offAllNamed(AppRoutes.home);
     } else {
-      // Registration failed, show error message
       errorMessage.value = 'Registration failed. Please try again.';
     }
   }
 
   Future<void> login() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final emailError = AuthValidators.validateEmail(email);
+    final passwordError = AuthValidators.validatePassword(password);
+
+    if (emailError != null || passwordError != null) {
+      errorMessage.value = emailError ?? passwordError!;
+      return;
+    }
+
     isLoading.value = true;
     errorMessage.value = '';
-    final result = await _loginUserUseCase.execute(
-      emailController.text.trim(),
-      passwordController.text.trim(),
-    );
+    final result = await _loginUserUseCase.execute(email, password);
     isLoading.value = false;
     if (result != null) {
       Get.offAllNamed(AppRoutes.home);
     } else {
-      errorMessage.value = 'Login failed. Invalid email or password.';
+      errorMessage.value = 'Login failed. Please try again.';
     }
   }
 

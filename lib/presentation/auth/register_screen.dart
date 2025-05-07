@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/auth/auth_controller.dart';
+import 'package:service_reservation_app/utils/appAssets/AppAssets.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
@@ -38,15 +39,14 @@ class RegisterScreen extends GetView<AuthController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 8),
+              const SizedBox(height: 5),
               Text(AppStrings.signUp, style: AppTextStyles.heading),
-              const SizedBox(height: 32),
+              const SizedBox(height: 5),
               // Image
               Image.asset(
-                'assets/images/person.png', // Replace with your actual signup illustration
-                height: 150, // Adjust height as needed
+               AppAssets.logo, // Replace with your actual signup illustration
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 5),
               ReusableTextField(
                 labelText: AppStrings.fullNameLabel,
                 controller: controller.nameController,

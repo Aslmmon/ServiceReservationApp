@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/auth/auth_controller.dart';
 import 'package:service_reservation_app/routes/app_routes.dart';
+import '../../utils/appAssets/AppAssets.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
@@ -19,25 +20,23 @@ class LoginScreen extends GetView<AuthController> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 60),
               Text(AppStrings.welcomeBack, style: AppTextStyles.subHeading),
-              const SizedBox(height: 8),
+              const SizedBox(height: 5),
               Text(AppStrings.login, style: AppTextStyles.heading),
-              const SizedBox(height: 32),
-              // Image
+              const SizedBox(height: 5),
               Image.asset(
-                'assets/images/person.png', // Path to your SVG file
-                height: 150,
+                AppAssets.logo, // Path to your SVG file
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 5),
               ReusableTextField(
                 labelText: AppStrings.emailLabel,
                 controller: controller.emailController,
                 keyboardType: TextInputType.emailAddress,
+                maxLength: 40, // Email max length
               ),
               Obx(
                 () => ReusableTextField(
@@ -77,7 +76,7 @@ class LoginScreen extends GetView<AuthController> {
                   },
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
