@@ -20,7 +20,7 @@ class LoginScreen extends GetView<AuthController> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -29,7 +29,8 @@ class LoginScreen extends GetView<AuthController> {
               Text(AppStrings.login, style: AppTextStyles.heading),
               const SizedBox(height: 5),
               Image.asset(
-                AppAssets.logo, // Path to your SVG file
+                AppAssets.logo,
+                height: 200,
               ),
               const SizedBox(height: 5),
               ReusableTextField(
