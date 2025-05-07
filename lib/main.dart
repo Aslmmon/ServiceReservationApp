@@ -29,6 +29,13 @@ class MyApp extends StatelessWidget {
       initialBinding: AuthBinding(),
       theme: ThemeData(
         primaryColor: AppColors.primaryPurple,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          scrolledUnderElevation: 0.0,
+
+
+        ),
         colorScheme: ThemeData().colorScheme.copyWith(
           primary: AppColors.primaryPurple,
         ),

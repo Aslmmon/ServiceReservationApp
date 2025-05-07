@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:service_reservation_app/presentation/auth/auth_controller.dart';
-import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart';
 import 'package:service_reservation_app/routes/app_routes.dart';
+import 'package:service_reservation_app/utils/components/AppButton.dart';
 
 import '../../../data/models/specialist_model.dart';
 import '../../../utils/appColors/AppColors.dart';
@@ -17,13 +16,11 @@ class SpecialistGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final specialistController = Get.find<SpecialistController>();
     return Card(
       color: Colors.white,
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      child: InkWell(
-        onTap: () => specialistController.getSpecialistDetails(specialist.id),
+      elevation: 3.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      child: GestureDetector(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -53,22 +50,10 @@ class SpecialistGridItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryPurple,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                ),
-                onPressed: () {
-                  // print('${AppStrings.bookButtonTapped} ${specialist.name}');
-                  // authController
-                  //     .logout(); // Keep this for now, adjust as needed
-                  Get.toNamed(AppRoutes.booking, arguments: specialist);
-                },
-                child: Text(AppStrings.book),
+              ReusableButton(
+                text: AppStrings.book,
+                onPressed:
+                    () => Get.toNamed(AppRoutes.booking, arguments: specialist),
               ),
             ],
           ),

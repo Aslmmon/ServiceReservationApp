@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart'
     show SpecialistController;
+import 'package:service_reservation_app/utils/appAssets/AppAssets.dart';
 import 'package:service_reservation_app/utils/components/AppTextField.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
@@ -19,7 +20,14 @@ class SpecialistListScreen extends GetView<SpecialistController> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        scrolledUnderElevation: 0.0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Hero(
+            tag: "1",
+            child: CircleAvatar(child: Image.asset(AppAssets.logo, scale: 22)),
+          ),
+        ),
+        forceMaterialTransparency: true,
         title: Text(AppStrings.specialists.tr),
         actions: [
           PopupMenuButton<String>(
@@ -84,7 +92,7 @@ class SpecialistListScreen extends GetView<SpecialistController> {
               final specialistsInCategory =
                   controller.specialistsByCategory[specialization]!;
               return AnimatedOpacity(
-                duration: const Duration(milliseconds: 500),
+                duration: const Duration(seconds: 4),
                 opacity: 1.0,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +102,7 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                       child: Text(
                         specialization.tr,
                         // Assuming specialization might be localizable
-                        style: AppTextStyles.subHeading.copyWith(
+                        style: AppTextStyles.heading.copyWith(
                           color: AppColors.primaryPurple,
                         ),
                       ),
@@ -105,10 +113,10 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
+                            crossAxisCount: 3,
                             childAspectRatio: 0.8,
-                            crossAxisSpacing: 8.0,
-                            mainAxisSpacing: 8.0,
+                            crossAxisSpacing: 1.0,
+                            mainAxisSpacing: 1.0,
                           ),
                       itemCount: specialistsInCategory.length,
                       itemBuilder: (context, index) {
@@ -116,7 +124,6 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                         return SpecialistGridItem(specialist: specialist);
                       },
                     ),
-                    const SizedBox(height: 16.0),
                   ],
                 ),
               );
