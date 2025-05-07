@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart'
     show SpecialistController;
-import 'package:service_reservation_app/utils/appAssets/AppAssets.dart';
 import 'package:service_reservation_app/utils/components/AppTextField.dart';
+import '../../utils/appAssets/AppAssets.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
@@ -22,16 +22,12 @@ class SpecialistListScreen extends GetView<SpecialistController> {
         centerTitle: true,
         forceMaterialTransparency: true,
         title: Text(AppStrings.specialists.tr),
-        leading: Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Hero(tag: "1", child: Image.asset(AppAssets.logo)),
-        ),
+        leading: Padding(padding: EdgeInsets.only(left: 10), child: Logo()),
         actions: [
           PopupMenuButton<String>(
             itemBuilder:
                 (BuildContext context) => <PopupMenuEntry<String>>[
                   PopupMenuItem<String>(
-                    value: 'sign_out',
                     onTap: () => controller.logout(),
                     child: Text(AppStrings.logOut.tr),
                   ),
@@ -45,10 +41,12 @@ class SpecialistListScreen extends GetView<SpecialistController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              " ${AppStrings.emojiHi} ${controller.getUser()?.name} ",
-              style: AppTextStyles.heading,
-            ),
+            Obx(() {
+              return Text(
+                " ${AppStrings.emojiHi} ${controller.getUser()?.name} ",
+                style: AppTextStyles.heading,
+              );
+            }),
             ReusableTextField(
               // Using the reusable component
               labelText: AppStrings.searchSpecialistHint.tr,
@@ -108,24 +106,23 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                                 style: AppTextStyles.heading,
                               ),
                             ),
-                            GridView.builder(
+                            ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8.0,
                               ),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.8,
-                                    crossAxisSpacing: 8.0,
-                                    mainAxisSpacing: 8.0,
-                                  ),
                               itemCount: specialistsInCategory.length,
                               itemBuilder: (context, index) {
                                 final specialist = specialistsInCategory[index];
-                                return SpecialistGridItem(
-                                  specialist: specialist,
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 20,
+                                    bottom: 20,
+                                  ),
+                                  child: SpecialistItem(
+                                    specialist: specialist,
+                                  ),
                                 );
                               },
                             ),
@@ -141,5 +138,14 @@ class SpecialistListScreen extends GetView<SpecialistController> {
         ),
       ),
     );
+  }
+}
+
+class Logo extends StatelessWidget {
+  const Logo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(tag: AppStrings.heroTag, child: Image.asset(AppAssets.logo));
   }
 }

@@ -1,6 +1,7 @@
 class AppStrings {
-
   static final emojiHi = "👋 Hi";
+  static final heroTag = "👋 logoTag";
+  static const String availability = "Availability : ";
 
   static const String appName = 'Service Reservation App';
   static const String error = 'Error';

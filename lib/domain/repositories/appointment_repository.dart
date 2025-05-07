@@ -8,7 +8,7 @@ abstract class AppointmentRepository {
     DateTime dateTime,
   );
 
-  Future<List<Appointment>> getUserAppointments(String userId);
+  Future<List<Appointment>> getUserAppointments();
 
   Future<void> cancelAppointment(String appointmentId);
 }

@@ -15,6 +15,7 @@ class Specialist {
     required this.availableDays,
   });
 
+
   factory Specialist.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data();
     final availableDaysMap =

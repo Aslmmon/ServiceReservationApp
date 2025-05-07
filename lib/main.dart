@@ -8,6 +8,7 @@ import 'package:service_reservation_app/routes/app_navigation.dart';
 import 'package:service_reservation_app/routes/app_routes.dart' show AppRoutes;
 import 'package:service_reservation_app/utils/appColors/AppColors.dart';
 import 'package:service_reservation_app/utils/appStrings/AppStrings.dart';
+import 'package:service_reservation_app/utils/appTextStyle/AppTextStyles.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -33,8 +34,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Colors.white,
           scrolledUnderElevation: 0.0,
-
-
+          titleTextStyle: AppTextStyles.heading,
         ),
         colorScheme: ThemeData().colorScheme.copyWith(
           primary: AppColors.primaryPurple,

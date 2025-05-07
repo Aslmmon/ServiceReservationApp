@@ -7,7 +7,7 @@ class GetUserAppointmentsUseCase {
 
   GetUserAppointmentsUseCase({required this.appointmentRepository});
 
-  Future<List<Appointment>> execute(String userId) async {
-    return await appointmentRepository.getUserAppointments(userId);
+  Future<List<Appointment>> execute() async {
+    return await appointmentRepository.getUserAppointments();
   }
 }

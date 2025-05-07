@@ -7,20 +7,22 @@ class ReusableButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isLoading;
   final double height;
+  final double width;
 
   const ReusableButton({
     super.key,
     required this.text,
     required this.onPressed,
     this.isLoading = false,
-     this.height = 50,
+    this.height = 50,
+     this.width = double.infinity,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      width: double.infinity,
+      width: width,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

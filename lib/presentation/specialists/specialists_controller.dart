@@ -14,7 +14,6 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_specia
 
 import '../../domain/use_cases/auth/logout_user_use_case.dart';
 import '../../routes/app_routes.dart';
-import '../../data/models/user_model.dart';
 
 class SpecialistController extends GetxController {
   final GetAllSpecialistsUseCase _getAllSpecialistsUseCase = Get.find();
@@ -43,6 +42,7 @@ class SpecialistController extends GetxController {
     });
     super.onInit();
   }
+
 
   Future<void> fetchSpecialists() async {
     isLoading.value = true;
@@ -88,6 +88,7 @@ class SpecialistController extends GetxController {
 
   Future<void> loadLoggedInUser() async {
     final user = await _getCurrentUserUseCase.execute();
+    print("user is ${user?.name.toString()}");
     loggedInUser.value = user;
   }
 

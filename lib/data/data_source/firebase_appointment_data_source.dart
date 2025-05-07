@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../domain/repositories/appointment_repository.dart';
 import '../../../domain/entities/appointment_status.dart';
 import '../models/appointment_model.dart' show Appointment;
@@ -6,6 +7,7 @@ import '../models/appointment_model.dart' show Appointment;
 class FirebaseAppointmentRepository implements AppointmentRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _appointmentsCollection = 'appointments';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Future<void> bookAppointment(
@@ -32,11 +34,11 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
   }
 
   @override
-  Future<List<Appointment>> getUserAppointments(String userId) async {
+  Future<List<Appointment>> getUserAppointments() async {
     final QuerySnapshot<Map<String, dynamic>> snapshot =
         await _firestore
             .collection(_appointmentsCollection)
-            .where('userId', isEqualTo: userId)
+            .where('userId', isEqualTo: _auth.currentUser?.uid)
             .get();
     return snapshot.docs.map((doc) => Appointment.fromFirestore(doc)).toList();
   }

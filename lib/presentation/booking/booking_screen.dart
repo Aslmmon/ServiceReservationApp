@@ -70,8 +70,9 @@ class _BookingScreenState extends State<BookingScreen> {
         title: Text(AppStrings.bookAppointment),
         leading: IconButton(
           icon: const Icon(
+            size: 15,
             Icons.arrow_back_ios_new,
-            color: AppColors.primaryPurple,
+            color: AppColors.darkText,
           ),
           onPressed: () => Get.back(),
         ),
@@ -82,7 +83,7 @@ class _BookingScreenState extends State<BookingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${AppStrings.bookWithSpecialist} ${_specialist?.name ?? AppStrings.loading}...',
+              '${AppStrings.bookWithSpecialist} ${_specialist?.name ?? AppStrings.loading}',
               style: AppTextStyles.heading.copyWith(
                 color: AppColors.primaryPurple,
               ),
@@ -155,22 +156,14 @@ class _BookingScreenState extends State<BookingScreen> {
           _focusedDay = focusedDay;
         },
         calendarStyle: CalendarStyle(
+
+          isTodayHighlighted: false,
           selectedDecoration: BoxDecoration(
             color: AppColors.primaryPurple,
             shape: BoxShape.circle,
           ),
-          todayDecoration: BoxDecoration(
-            color: AppColors.darkText.withOpacity(0.5),
-            shape: BoxShape.circle,
-          ),
         ),
-        headerStyle: HeaderStyle(
-          formatButtonTextStyle: TextStyle(color: Colors.white, fontSize: 14.0),
-          formatButtonDecoration: BoxDecoration(
-            color: AppColors.primaryPurple,
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-        ),
+
       ),
     );
   }
@@ -202,7 +195,6 @@ class _BookingScreenState extends State<BookingScreen> {
 
   Widget _buildNextButton() {
     return SizedBox(
-      // To make the button take full width
       width: double.infinity,
       child: ReusableButton(
         text: AppStrings.nextReviewConfirm,

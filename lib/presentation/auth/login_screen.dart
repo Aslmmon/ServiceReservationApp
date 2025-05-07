@@ -28,7 +28,10 @@ class LoginScreen extends GetView<AuthController> {
               const SizedBox(height: 5),
               Text(AppStrings.login, style: AppTextStyles.heading),
               const SizedBox(height: 5),
-              Hero(tag: "1", child: Image.asset(AppAssets.logo, height: 200)),
+              Hero(
+                tag: AppStrings.heroTag,
+                child: Image.asset(AppAssets.logo, height: 200),
+              ),
               const SizedBox(height: 5),
               ReusableTextField(
                 labelText: AppStrings.emailLabel,

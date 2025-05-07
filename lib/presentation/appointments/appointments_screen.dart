@@ -13,9 +13,9 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppStrings.myAppointments)),
+      appBar: AppBar(title: Text(AppStrings.myAppointments), centerTitle: true),
       body: Obx(
-            () => RefreshIndicator(
+        () => RefreshIndicator(
           onRefresh: () async {
             await controller.fetchUserAppointments();
           },
@@ -40,14 +40,12 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
       );
     } else if (controller.appointments.isEmpty) {
       return const Center(
-        child: Text(
-          AppStrings.noAppointments,
-          style: TextStyle(fontSize: 16),
-        ),
+        child: Text(AppStrings.noAppointments, style: TextStyle(fontSize: 16)),
       );
     } else {
       return ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(), // Enable scrolling even if content is short
+        physics: const AlwaysScrollableScrollPhysics(),
+        // Enable scrolling even if content is short
         itemCount: controller.appointments.length,
         itemBuilder: (context, index) {
           final appointment = controller.appointments[index];
@@ -85,23 +83,25 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
                 if (appointment.status !=
                     'cancelled') // Don't show cancel button if already cancelled
                   Obx(
-                        () => controller.isLoading.value &&
-                        controller.appointments.any(
-                              (appt) => appt.id == appointment.id,
-                        )
-                        ? const CircularProgressIndicator(
-                      color: AppColors.darkText,
-                      strokeWidth: 2.0,
-                    )
-                        : TextButton(
-                      onPressed: () => _showCancelConfirmationDialog(
-                        appointment.id,
-                      ),
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppColors.darkText,
-                      ),
-                      child: Text(AppStrings.cancelAppointment),
-                    ),
+                    () =>
+                        controller.isLoading.value &&
+                                controller.appointments.any(
+                                  (appt) => appt.id == appointment.id,
+                                )
+                            ? const CircularProgressIndicator(
+                              color: AppColors.darkText,
+                              strokeWidth: 2.0,
+                            )
+                            : TextButton(
+                              onPressed:
+                                  () => _showCancelConfirmationDialog(
+                                    appointment.id,
+                                  ),
+                              style: TextButton.styleFrom(
+                                foregroundColor: AppColors.darkText,
+                              ),
+                              child: Text(AppStrings.cancelAppointment),
+                            ),
                   ),
               ],
             ),
