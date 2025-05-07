@@ -9,12 +9,12 @@ class FirebaseUserRepository implements UserRepository {
   final String _usersCollection = 'users';
 
   @override
-  Future<User?> register(String name, String email, String password) async {
+  Future<UserModel?> register(String name, String email, String password) async {
     try {
       final auth.UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
-        final User user = User(
+        final UserModel user = UserModel(
           id: userCredential.user!.uid,
           name: name,
           email: email,
@@ -33,7 +33,7 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<User?> login(String email, String password) async {
+  Future<UserModel?> login(String email, String password) async {
     try {
       final auth.UserCredential userCredential = await _auth
           .signInWithEmailAndPassword(email: email, password: password);
@@ -43,7 +43,7 @@ class FirebaseUserRepository implements UserRepository {
                 .collection(_usersCollection)
                 .doc(userCredential.user!.uid)
                 .get();
-        return User.fromFirestore(snapshot);
+        return UserModel.fromFirestore(snapshot);
       }
       return null;
     } catch (e) {
@@ -58,7 +58,7 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<User?> getCurrentUser() async {
+  Future<UserModel?> getCurrentUser() async {
     final auth.User? currentUser = _auth.currentUser;
     if (currentUser != null) {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -67,18 +67,18 @@ class FirebaseUserRepository implements UserRepository {
               .doc(currentUser.uid)
               .get();
       if (snapshot.exists) {
-        return User.fromFirestore(snapshot);
+        return UserModel.fromFirestore(snapshot);
       }
     }
     return null;
   }
 
   @override
-  Future<User?> getUserById(String id) async {
+  Future<UserModel?> getUserById(String id) async {
     final DocumentSnapshot<Map<String, dynamic>> snapshot =
         await _firestore.collection(_usersCollection).doc(id).get();
     if (snapshot.exists) {
-      return User.fromFirestore(snapshot);
+      return UserModel.fromFirestore(snapshot);
     }
     return null;
   }

@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart'
     show Specialist, createDummySpecialistList, specialistLists;
+import 'package:service_reservation_app/data/models/user_model.dart';
+import 'package:service_reservation_app/domain/use_cases/appointment/GetUserAppointmentsUseCase.dart';
+import 'package:service_reservation_app/domain/use_cases/auth/get_current_user_use_case.dart';
 import 'package:service_reservation_app/domain/use_cases/specialities/get_all_specialists_use_case.dart'
     show GetAllSpecialistsUseCase;
 import 'package:service_reservation_app/domain/use_cases/specialities/get_specialist_by_id_use_case.dart'
@@ -10,11 +14,13 @@ import 'package:service_reservation_app/domain/use_cases/specialities/get_specia
 
 import '../../domain/use_cases/auth/logout_user_use_case.dart';
 import '../../routes/app_routes.dart';
+import '../../data/models/user_model.dart';
 
 class SpecialistController extends GetxController {
   final GetAllSpecialistsUseCase _getAllSpecialistsUseCase = Get.find();
   final GetSpecialistByIdUseCase _getSpecialistByIdUseCase = Get.find();
   final LogoutUserUseCase _logoutUserUseCase = Get.find();
+  final GetCurrentUserUseCase _getCurrentUserUseCase = Get.find();
 
   final RxList<Specialist> _allSpecialists = <Specialist>[].obs;
   final RxList<Specialist> filteredSpecialists = <Specialist>[].obs;
@@ -26,8 +32,11 @@ class SpecialistController extends GetxController {
       <String, List<Specialist>>{}.obs;
   final TextEditingController searchController = TextEditingController();
 
+  final Rxn<UserModel> loggedInUser = Rxn<UserModel>();
+
   @override
   void onInit() {
+    loadLoggedInUser();
     fetchSpecialists();
     searchController.addListener(() {
       filterSpecialists(searchController.text);
@@ -60,8 +69,7 @@ class SpecialistController extends GetxController {
           .doc(value.id)
           .set(value.toFirestore())
           .onError(
-            (e, _) =>
-                print("Error writing document for ${value.name}: $e"),
+            (e, _) => print("Error writing document for ${value.name}: $e"),
           );
     }
 
@@ -73,10 +81,18 @@ class SpecialistController extends GetxController {
       _logoutUserUseCase.execute().whenComplete(() {
         Get.offAllNamed(AppRoutes.login);
       });
-
     } catch (e) {
       print('Error signing out: $e');
     }
+  }
+
+  Future<void> loadLoggedInUser() async {
+    final user = await _getCurrentUserUseCase.execute();
+    loggedInUser.value = user;
+  }
+
+  UserModel? getUser() {
+    return loggedInUser.value;
   }
 
   Future<void> getSpecialistDetails(String id) async {
@@ -121,7 +137,7 @@ class SpecialistController extends GetxController {
 
   @override
   void onClose() {
-    searchController.dispose(); // Dispose of the searchController
+    searchController.dispose();
     super.onClose();
   }
 }

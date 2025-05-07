@@ -1,4 +1,4 @@
-import 'package:service_reservation_app/data/models/user_model.dart' show User;
+import 'package:service_reservation_app/data/models/user_model.dart' show UserModel;
 import 'package:service_reservation_app/domain/repositories/user_repository.dart'
     show UserRepository;
 
@@ -7,7 +7,7 @@ class RegisterUserUseCase {
 
   RegisterUserUseCase({required this.userRepository});
 
-  Future<User?> execute(String name, String email, String password) async {
+  Future<UserModel?> execute(String name, String email, String password) async {
     return await userRepository.register(name, email, password);
   }
 }

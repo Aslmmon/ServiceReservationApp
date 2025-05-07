@@ -20,13 +20,6 @@ class SpecialistListScreen extends GetView<SpecialistController> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Hero(
-            tag: "1",
-            child: CircleAvatar(child: Image.asset(AppAssets.logo, scale: 22)),
-          ),
-        ),
         forceMaterialTransparency: true,
         title: Text(AppStrings.specialists.tr),
         actions: [
@@ -42,11 +35,17 @@ class SpecialistListScreen extends GetView<SpecialistController> {
             icon: const Icon(Icons.more_vert),
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(100.0),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ReusableTextField(
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              " ${AppStrings.emojiHi} ${controller.getUser()?.name} ",
+              style: AppTextStyles.heading,
+            ),
+            ReusableTextField(
               // Using the reusable component
               labelText: AppStrings.searchSpecialistHint.tr,
               controller: controller.searchController,
@@ -54,83 +53,91 @@ class SpecialistListScreen extends GetView<SpecialistController> {
               suffixIcon: const Icon(Icons.search, color: AppColors.lightText),
               onChanged: controller.filterSpecialists,
             ),
-          ),
+            Obx(() {
+              if (controller.isLoading.value) {
+                return const Center(
+                  child:
+                      LoadingIndicator(), // Using the reusable loading indicator
+                );
+              } else if (controller.errorMessage.value.isNotEmpty) {
+                return Center(
+                  child: ErrorMessage(
+                    message:
+                        '${AppStrings.error.tr}: ${controller.errorMessage.value}',
+                  ), // Reusable error
+                );
+              } else if (controller.specialistsByCategory.isEmpty &&
+                  controller.searchQuery.isNotEmpty) {
+                return const Center(
+                  child: EmptyState(
+                    message: AppStrings.noSpecialistsFoundSearch,
+                  ), // Reusable empty state
+                );
+              } else if (controller.specialistsByCategory.isEmpty &&
+                  controller.searchQuery.isEmpty) {
+                return const Center(
+                  child: EmptyState(
+                    message: AppStrings.noSpecialistsAvailable,
+                  ), // Reusable empty state
+                );
+              } else {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.specialistsByCategory.keys.length,
+                    itemBuilder: (context, categoryIndex) {
+                      final specialization =
+                          controller.specialistsByCategory.keys
+                              .toList()[categoryIndex];
+                      final specialistsInCategory =
+                          controller.specialistsByCategory[specialization]!;
+                      return AnimatedOpacity(
+                        duration: const Duration(seconds: 4),
+                        opacity: 1.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                specialization.tr,
+                                // Assuming specialization might be localizable
+                                style: AppTextStyles.heading.copyWith(
+                                  color: AppColors.primaryPurple,
+                                ),
+                              ),
+                            ),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                              ),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    childAspectRatio: 0.8,
+                                    crossAxisSpacing: 1.0,
+                                    mainAxisSpacing: 1.0,
+                                  ),
+                              itemCount: specialistsInCategory.length,
+                              itemBuilder: (context, index) {
+                                final specialist = specialistsInCategory[index];
+                                return SpecialistGridItem(
+                                  specialist: specialist,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+            }),
+          ],
         ),
       ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(
-            child: LoadingIndicator(), // Using the reusable loading indicator
-          );
-        } else if (controller.errorMessage.value.isNotEmpty) {
-          return Center(
-            child: ErrorMessage(
-              message:
-                  '${AppStrings.error.tr}: ${controller.errorMessage.value}',
-            ), // Reusable error
-          );
-        } else if (controller.specialistsByCategory.isEmpty &&
-            controller.searchQuery.isNotEmpty) {
-          return const Center(
-            child: EmptyState(
-              message: AppStrings.noSpecialistsFoundSearch,
-            ), // Reusable empty state
-          );
-        } else if (controller.specialistsByCategory.isEmpty &&
-            controller.searchQuery.isEmpty) {
-          return const Center(
-            child: EmptyState(
-              message: AppStrings.noSpecialistsAvailable,
-            ), // Reusable empty state
-          );
-        } else {
-          return ListView.builder(
-            itemCount: controller.specialistsByCategory.keys.length,
-            itemBuilder: (context, categoryIndex) {
-              final specialization =
-                  controller.specialistsByCategory.keys.toList()[categoryIndex];
-              final specialistsInCategory =
-                  controller.specialistsByCategory[specialization]!;
-              return AnimatedOpacity(
-                duration: const Duration(seconds: 4),
-                opacity: 1.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        specialization.tr,
-                        // Assuming specialization might be localizable
-                        style: AppTextStyles.heading.copyWith(
-                          color: AppColors.primaryPurple,
-                        ),
-                      ),
-                    ),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: 0.8,
-                            crossAxisSpacing: 1.0,
-                            mainAxisSpacing: 1.0,
-                          ),
-                      itemCount: specialistsInCategory.length,
-                      itemBuilder: (context, index) {
-                        final specialist = specialistsInCategory[index];
-                        return SpecialistGridItem(specialist: specialist);
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        }
-      }),
     );
   }
 }
