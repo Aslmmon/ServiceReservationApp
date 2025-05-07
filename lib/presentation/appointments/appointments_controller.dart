@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/appointment_model.dart';
@@ -24,11 +23,7 @@ class MyAppointmentsController extends GetxController {
 
     final result = await _getUserAppointmentsUseCase.execute();
     isLoading.value = false;
-    if (result != null) {
-      appointments.assignAll(result);
-    } else {
-      errorMessage.value = 'Failed to fetch your appointments.';
-    }
+    appointments.assignAll(result);
   }
 
   Future<void> cancelAppointment(String appointmentId) async {
@@ -39,9 +34,7 @@ class MyAppointmentsController extends GetxController {
       isLoading.value = false;
       appointments.removeWhere((appt) => appt.id == appointmentId);
       Get.snackbar('Success', 'Appointment cancelled successfully!');
-      // Optionally, you might want to just update the local list
-      // instead of refetching all appointments:
-       appointments.refresh();
+      appointments.refresh();
     } catch (e) {
       isLoading.value = false;
       errorMessage.value = 'Failed to cancel appointment: ${e.toString()}';

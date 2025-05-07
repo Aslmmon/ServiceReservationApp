@@ -11,3 +11,13 @@ TimeOfDay? convertStringToTimeOfDay(String timeStr) {
     return null;
   }
 }
+
+extension DateTimeExtension on DateTime {
+  String formatDate() {
+    return DateFormat('EEEE, MMMM d, y').format(this);
+  }
+
+  String formatTime() {
+    return DateFormat('h:mm a').format(this);
+  }
+}

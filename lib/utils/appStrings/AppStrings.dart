@@ -62,6 +62,8 @@ class AppStrings {
   static const String myAppointments = 'My Appointments';
   static const String noAppointments = 'You have no upcoming appointments.';
   static const String specialistName = 'Specialist:';
+  static const String appointmentId = 'you have appointment with id :';
+
   static const String appointmentDate = 'Date:';
   static const String appointmentTime = 'Time:';
   static const String cancelAppointment = 'Cancel';

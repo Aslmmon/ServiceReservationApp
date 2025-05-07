@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:service_reservation_app/presentation/appointments/appointments_controller.dart';
+import 'package:service_reservation_app/utils/components/AppButton.dart';
+import 'package:service_reservation_app/utils/utils.dart';
 import '../../data/models/appointment_model.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
@@ -45,7 +47,6 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
     } else {
       return ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        // Enable scrolling even if content is short
         itemCount: controller.appointments.length,
         itemBuilder: (context, index) {
           final appointment = controller.appointments[index];
@@ -64,46 +65,26 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${AppStrings.specialistName} ${appointment.specialistId}',
+              '${AppStrings.appointmentId} ${appointment.id}',
               style: AppTextStyles.label,
             ),
             const SizedBox(height: 8),
             Text(
-              '${AppStrings.appointmentDate} ${DateFormat('EEEE, MMMM d, y').format(appointment.dateTime)}',
+              '${AppStrings.appointmentDate} ${appointment.dateTime.formatDate()}',
               style: AppTextStyles.label,
             ),
             Text(
-              '${AppStrings.appointmentTime} ${DateFormat('h:mm a').format(appointment.dateTime)}',
+              '${AppStrings.appointmentTime} ${appointment.dateTime.formatTime()}',
               style: AppTextStyles.label,
             ),
             const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (appointment.status !=
-                    'cancelled') // Don't show cancel button if already cancelled
-                  Obx(
-                    () =>
-                        controller.isLoading.value &&
-                                controller.appointments.any(
-                                  (appt) => appt.id == appointment.id,
-                                )
-                            ? const CircularProgressIndicator(
-                              color: AppColors.darkText,
-                              strokeWidth: 2.0,
-                            )
-                            : TextButton(
-                              onPressed:
-                                  () => _showCancelConfirmationDialog(
-                                    appointment.id,
-                                  ),
-                              style: TextButton.styleFrom(
-                                foregroundColor: AppColors.darkText,
-                              ),
-                              child: Text(AppStrings.cancelAppointment),
-                            ),
-                  ),
-              ],
+            ReusableButton(
+              text: AppStrings.cancel,
+              onPressed: () {
+                _showCancelConfirmationDialog(
+                  appointment.id,
+                );
+              },
             ),
           ],
         ),
