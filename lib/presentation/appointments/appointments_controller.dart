@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:service_reservation_app/utils/appStrings/AppStrings.dart';
 
 import '../../../data/models/appointment_model.dart';
 import '../../../domain/use_cases/appointment/CancelAppointmentUseCase.dart';
@@ -10,6 +11,7 @@ class MyAppointmentsController extends GetxController {
   final RxList<Appointment> appointments = <Appointment>[].obs;
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
+  final RxMap<String, RxBool> isCancelling = <String, RxBool>{}.obs;
 
   @override
   void onInit() {
@@ -26,18 +28,21 @@ class MyAppointmentsController extends GetxController {
   }
 
   Future<void> cancelAppointment(String appointmentId) async {
-    isLoading.value = true;
+    isCancelling[appointmentId] =
+        true.obs; // Set loading to true for this appointment
     errorMessage.value = '';
     try {
       await _cancelAppointmentUseCase.execute(appointmentId);
-      isLoading.value = false;
       appointments.removeWhere((appt) => appt.id == appointmentId);
-      Get.snackbar('Success', 'Appointment cancelled successfully!');
+      Get.snackbar(AppStrings.ok, AppStrings.cancelAppointmentSuccess);
       appointments.refresh();
     } catch (e) {
-      isLoading.value = false;
-      errorMessage.value = 'Failed to cancel appointment: ${e.toString()}';
-      Get.snackbar('Error', errorMessage.value);
+      errorMessage.value =
+          '${AppStrings.cancelAppointmentFailure}: ${e.toString()}';
+      Get.snackbar(AppStrings.cancel, errorMessage.value);
+    } finally {
+      isCancelling[appointmentId]?.value = false; // Set loading to false
+      isCancelling.remove(appointmentId); // Clean up the map
     }
   }
 }

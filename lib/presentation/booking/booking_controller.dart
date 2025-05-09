@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/models/appointment_model.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/get_current_user_use_case.dart';
+import 'package:service_reservation_app/presentation/appointments/appointments_controller.dart';
 import '../../domain/use_cases/booking/book_appointment_use_case.dart';
 
 class BookingController extends GetxController {
@@ -18,6 +19,7 @@ class BookingController extends GetxController {
     try {
       await _bookAppointmentUseCase.execute(appointment);
       isBooking.value = false;
+      await Get.find<MyAppointmentsController>().fetchUserAppointments();
       Get.snackbar('Success', 'Appointment booked successfully!');
     } catch (e) {
       bookingError.value = 'Failed to book appointment.';

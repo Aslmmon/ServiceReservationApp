@@ -48,6 +48,7 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
         itemCount: controller.appointments.length,
         itemBuilder: (context, index) {
           final appointment = controller.appointments[index];
+          print(appointment.date.toString());
           return _buildAppointmentItem(appointment);
         },
       );
@@ -64,16 +65,16 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
           children: [
             Text(
               '${AppStrings.appointmentId} ${appointment.id}',
-              style: AppTextStyles.label,
+              style: AppTextStyles.heading,
             ),
             const SizedBox(height: 8),
             Text(
               '${AppStrings.appointmentDate} ${appointment.date}',
-              style: AppTextStyles.label,
+              style: AppTextStyles.subHeading,
             ),
             Text(
               '${AppStrings.appointmentTime} ${appointment.time}',
-              style: AppTextStyles.label,
+              style: AppTextStyles.subHeading,
             ),
             const SizedBox(height: 16),
             ReusableButton(
@@ -97,14 +98,22 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
         ),
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text('No')),
-          TextButton(
-            onPressed: () {
-              controller.cancelAppointment(appointmentId);
-              Get.back();
-            },
-            style: TextButton.styleFrom(foregroundColor: AppColors.darkText),
-            child: const Text('Yes, Cancel'),
-          ),
+          Obx(() {
+            final isCurrentlyCancelling =
+                controller.isCancelling[appointmentId]?.value ?? false;
+            return isCurrentlyCancelling
+                ? const CircularProgressIndicator()
+                : TextButton(
+                  onPressed: () {
+                    controller.cancelAppointment(appointmentId);
+                    Get.back();
+                  },
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColors.darkText,
+                  ),
+                  child: const Text('Yes, Cancel'),
+                );
+          }),
         ],
       ),
     );

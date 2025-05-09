@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../domain/repositories/appointment_repository.dart';
-import '../../../domain/entities/appointment_status.dart';
 import '../models/appointment_model.dart' show Appointment;
 
 class FirebaseAppointmentRepository implements AppointmentRepository {
