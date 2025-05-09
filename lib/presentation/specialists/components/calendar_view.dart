@@ -34,7 +34,7 @@ class _CalendarViewState extends State<CalendarView> {
       ),
       child: TableCalendar(
         firstDay: DateTime.now(),
-        lastDay: DateTime(DateTime.now().year + 1),
+        lastDay: DateTime(DateTime.now().year+1 ),
         focusedDay: widget.focusedDay,
         calendarFormat: widget.calendarFormat,
         selectedDayPredicate: (day) {

@@ -11,19 +11,9 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
 
   @override
   Future<void> bookAppointment(
-    String userId,
-    String specialistId,
-    DateTime dateTime,
+   Appointment appointment
   ) async {
     try {
-      final Appointment appointment = Appointment(
-        id: '',
-        // Firestore will auto-generate an ID
-        userId: userId,
-        specialistId: specialistId,
-        dateTime: dateTime,
-        status: AppointmentStatus.booked,
-      );
       await _firestore
           .collection(_appointmentsCollection)
           .add(appointment.toFirestore());

@@ -25,7 +25,7 @@ class TimeSelectionView extends StatelessWidget {
     if (selectedDay == null) {
       return Text(
         AppStrings.pleaseSelectDateFirst,
-        style: AppTextStyles.label.copyWith(color: AppColors.lightText),
+        style: AppTextStyles.label.copyWith(color: AppColors.darkText),
       );
     } else if (availableTimesForSelectedDate.isEmpty) {
       return Text(

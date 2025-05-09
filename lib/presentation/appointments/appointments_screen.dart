@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:service_reservation_app/presentation/appointments/appointments_controller.dart';
 import 'package:service_reservation_app/utils/components/AppButton.dart';
-import 'package:service_reservation_app/utils/utils.dart';
 import '../../data/models/appointment_model.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
@@ -70,20 +68,18 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
             ),
             const SizedBox(height: 8),
             Text(
-              '${AppStrings.appointmentDate} ${appointment.dateTime.formatDate()}',
+              '${AppStrings.appointmentDate} ${appointment.date}',
               style: AppTextStyles.label,
             ),
             Text(
-              '${AppStrings.appointmentTime} ${appointment.dateTime.formatTime()}',
+              '${AppStrings.appointmentTime} ${appointment.time}',
               style: AppTextStyles.label,
             ),
             const SizedBox(height: 16),
             ReusableButton(
               text: AppStrings.cancel,
               onPressed: () {
-                _showCancelConfirmationDialog(
-                  appointment.id,
-                );
+                _showCancelConfirmationDialog(appointment.id!);
               },
             ),
           ],

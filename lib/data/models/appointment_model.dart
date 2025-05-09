@@ -3,17 +3,20 @@ import 'package:service_reservation_app/domain/entities/appointment_status.dart'
     show AppointmentStatus;
 
 class Appointment {
-  final String id;
-  final String userId;
-  final String specialistId;
-  final DateTime dateTime;
-  final AppointmentStatus status;
+  final String? id;
+  final String? userId;
+  final String? specialistId;
+  final String? date;
+  final String? time;
+
+  final AppointmentStatus? status;
 
   Appointment({
-    required this.id,
-    required this.userId,
+    this.id,
+    this.userId,
     required this.specialistId,
-    required this.dateTime,
+    required this.date,
+    required this.time,
     required this.status,
   });
 
@@ -21,7 +24,6 @@ class Appointment {
     DocumentSnapshot<Map<String, dynamic>> doc,
   ) {
     final data = doc.data();
-    final timestamp = data?['dateTime'] as Timestamp?;
     final statusString = data?['status'] as String?;
     AppointmentStatus parsedStatus = AppointmentStatus.booked;
 
@@ -36,7 +38,8 @@ class Appointment {
       id: doc.id,
       userId: data?['userId'] as String? ?? '',
       specialistId: data?['specialistId'] as String? ?? '',
-      dateTime: timestamp?.toDate() ?? DateTime.now(),
+      date: data?['date'] as String? ?? '',
+      time: data?['time'] as String? ?? '',
       status: parsedStatus,
     );
   }
@@ -45,8 +48,9 @@ class Appointment {
     return {
       'userId': userId,
       'specialistId': specialistId,
-      'dateTime': Timestamp.fromDate(dateTime),
-      'status': status.name.toLowerCase(),
+      'date': date,
+      'time': time,
+      'status': status?.name.toLowerCase(),
     };
   }
 }

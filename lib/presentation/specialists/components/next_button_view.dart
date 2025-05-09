@@ -13,7 +13,7 @@ class NextButtonView extends StatelessWidget {
   final Function(dynamic)? onBookAppointment; // Adjust the type if needed
   final BookingController bookingController = Get.find();
 
-   NextButtonView({
+  NextButtonView({
     super.key,
     this.specialist,
     this.selectedDay,
@@ -28,7 +28,9 @@ class NextButtonView extends StatelessWidget {
       child: ReusableButton(
         text: AppStrings.nextReviewConfirm.tr,
         onPressed: () {
-          if (selectedDay != null && selectedTime != null && specialist != null) {
+          if (selectedDay != null &&
+              selectedTime != null &&
+              specialist != null) {
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
@@ -39,20 +41,11 @@ class NextButtonView extends StatelessWidget {
                   selectedDay,
                   selectedTime?.format(context),
                   specialist?.id,
-                      (appointment) {
-                    bookingController.bookAppointment(
-                      appointment.specialistId,
-                      appointment.userId,
-                      appointment.dateTime,
-                    );
+                  (appointment) {
+                    bookingController.bookAppointment(appointment);
                   },
                 );
               },
-            );
-          } else {
-            // Optionally show a message if required fields are not selected
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Please select a date and time.')),
             );
           }
         },

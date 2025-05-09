@@ -39,9 +39,7 @@ class _BookingScreenState extends State<BookingScreen> {
   void didUpdateWidget(covariant BookingScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     _updateAvailableTimes();
-
   }
-
 
   void _updateAvailableTimes() {
     if (_selectedDay != null && _specialist != null) {
@@ -108,7 +106,7 @@ class _BookingScreenState extends State<BookingScreen> {
 
   Widget _buildSpecialistInfo() {
     return Text(
-      '${AppStrings.bookWithSpecialist.tr} ${_specialist?.name ?? AppStrings.loading.tr}',
+      '${AppStrings.bookWithSpecialist} ${_specialist?.name ?? AppStrings.loading}',
       style: AppTextStyles.heading.copyWith(color: AppColors.primaryPurple),
     );
   }

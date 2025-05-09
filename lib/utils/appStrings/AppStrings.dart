@@ -5,6 +5,8 @@ class AppStrings {
 
   static const String appName = 'Service Reservation App';
   static const String error = 'Error';
+  static const String missingDetails = 'Missing booking details. Please try again';
+
   static const String loading = 'Loading...';
   static const String book = 'Book';
   static const String bookButtonTapped = 'Book button tapped for';

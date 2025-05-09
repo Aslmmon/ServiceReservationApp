@@ -1,3 +1,5 @@
+import 'package:service_reservation_app/data/models/appointment_model.dart';
+
 import '../../repositories/appointment_repository.dart';
 
 class BookAppointmentUseCase {
@@ -5,11 +7,7 @@ class BookAppointmentUseCase {
 
   BookAppointmentUseCase({required this.appointmentRepository});
 
-  Future<void> execute(
-    String userId,
-    String specialistId,
-    DateTime dateTime,
-  ) async {
-    await appointmentRepository.bookAppointment(userId, specialistId, dateTime);
+  Future<void> execute(Appointment appointment) async {
+    await appointmentRepository.bookAppointment(appointment);
   }
 }

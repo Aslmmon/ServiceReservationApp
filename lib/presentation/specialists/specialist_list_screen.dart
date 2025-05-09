@@ -7,6 +7,7 @@ import '../../utils/appAssets/AppAssets.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
+import '../auth/auth_controller.dart';
 import 'components/SpecialistItem.dart';
 import 'components/empty_state.dart';
 import 'components/error_message.dart';
@@ -41,12 +42,10 @@ class SpecialistListScreen extends GetView<SpecialistController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Obx(() {
-              return Text(
-                " ${AppStrings.emojiHi} ${controller.getUser()?.name} ",
-                style: AppTextStyles.heading,
-              );
-            }),
+            Text(
+              " ${AppStrings.emojiHi} ${Get.find<AuthController>().getUserLocal()?.name} ",
+              style: AppTextStyles.heading,
+            ),
             ReusableTextField(
               // Using the reusable component
               labelText: AppStrings.searchSpecialistHint.tr,

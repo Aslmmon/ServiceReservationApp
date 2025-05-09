@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/data_source/firebase_specialist_data_source.dart'
     show FirebaseSpecialistRepository;
+import 'package:service_reservation_app/data/data_source/firebase_user_data_source.dart';
 import 'package:service_reservation_app/domain/repositories/specialist_repository.dart'
     show SpecialistRepository;
+import 'package:service_reservation_app/domain/repositories/user_repository.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/get_current_user_use_case.dart';
 import 'package:service_reservation_app/domain/use_cases/specialities/get_all_specialists_use_case.dart'
     show GetAllSpecialistsUseCase;
@@ -17,6 +19,7 @@ class SpecialistBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SpecialistRepository>(() => FirebaseSpecialistRepository());
+
     Get.lazyPut(
       () => GetAllSpecialistsUseCase(specialistRepository: Get.find()),
     );
@@ -26,7 +29,5 @@ class SpecialistBinding extends Bindings {
     Get.lazyPut(() => SpecialistController());
 
     Get.lazyPut(() => LogoutUserUseCase(userRepository: Get.find()));
-
-    Get.lazyPut(() => GetCurrentUserUseCase(userRepository: Get.find()));
   }
 }

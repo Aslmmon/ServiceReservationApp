@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:service_reservation_app/data/models/appointment_model.dart';
+import 'package:service_reservation_app/presentation/auth/auth_controller.dart';
+import 'package:service_reservation_app/presentation/booking/booking_controller.dart';
 import 'package:service_reservation_app/presentation/booking/components/BuildInfoRow.dart';
+import 'package:service_reservation_app/presentation/specialists/specialists_controller.dart';
+import 'package:service_reservation_app/utils/utils.dart';
 import '../../domain/entities/appointment_status.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
-import '../../utils/components/AppButton.dart'; // Assuming you have this
+import '../../utils/components/AppButton.dart';
 
 Widget buildConfirmationBottomSheet(
   BuildContext context,
@@ -36,7 +39,7 @@ Widget buildConfirmationBottomSheet(
           label: AppStrings.date,
           value:
               selectedDate != null
-                  ? DateFormat('EEEE, MMMM d, y').format(selectedDate)
+                  ? selectedDate.formatDate()
                   : AppStrings.loading,
         ),
 
@@ -53,15 +56,15 @@ Widget buildConfirmationBottomSheet(
               if (specialistId != null &&
                   selectedDate != null &&
                   selectedTimeFormatted != null) {
-                print(
-                  'Confirming booking for Specialist ID: $specialistId on ${selectedDate.toLocal()} at $selectedTimeFormatted',
-                );
+                print("dateTime + {$selectedDate}");
+                print("dateTimeFormated + {$selectedTimeFormatted}");
+
                 onBookingClicked(
                   Appointment(
-                    id: "1",
-                    userId: "k7odQ3NW47cZyu1cDJP6AeuGbVf2",
+                    userId: Get.find<BookingController>().getCurrentUserId(),
                     specialistId: specialistId,
-                    dateTime: selectedDate,
+                    date: selectedDate.formatDate(),
+                    time: selectedTimeFormatted,
                     status: AppointmentStatus.booked,
                   ),
                 );
@@ -69,7 +72,7 @@ Widget buildConfirmationBottomSheet(
               } else {
                 Get.snackbar(
                   AppStrings.error,
-                  '${AppStrings.error}: Missing booking details. Please try again.',
+                  '${AppStrings.error}: ${AppStrings.missingDetails}',
                   snackPosition: SnackPosition.BOTTOM,
                   backgroundColor: AppColors.darkText.withOpacity(0.8),
                   colorText: Colors.white,
@@ -94,9 +97,4 @@ Widget buildConfirmationBottomSheet(
       ],
     ),
   );
-}
-
-// Add this to your AppStrings file
-extension AppStringsExtension on AppStrings {
-  static const String cancel = 'Cancel';
 }

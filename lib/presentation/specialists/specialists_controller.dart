@@ -19,7 +19,6 @@ class SpecialistController extends GetxController {
   final GetAllSpecialistsUseCase _getAllSpecialistsUseCase = Get.find();
   final GetSpecialistByIdUseCase _getSpecialistByIdUseCase = Get.find();
   final LogoutUserUseCase _logoutUserUseCase = Get.find();
-  final GetCurrentUserUseCase _getCurrentUserUseCase = Get.find();
 
   final RxList<Specialist> _allSpecialists = <Specialist>[].obs;
   final RxList<Specialist> filteredSpecialists = <Specialist>[].obs;
@@ -35,14 +34,12 @@ class SpecialistController extends GetxController {
 
   @override
   void onInit() {
-    loadLoggedInUser();
     fetchSpecialists();
     searchController.addListener(() {
       filterSpecialists(searchController.text);
     });
     super.onInit();
   }
-
 
   Future<void> fetchSpecialists() async {
     isLoading.value = true;
@@ -84,12 +81,6 @@ class SpecialistController extends GetxController {
     } catch (e) {
       print('Error signing out: $e');
     }
-  }
-
-  Future<void> loadLoggedInUser() async {
-    final user = await _getCurrentUserUseCase.execute();
-    print("user is ${user?.name.toString()}");
-    loggedInUser.value = user;
   }
 
   UserModel? getUser() {

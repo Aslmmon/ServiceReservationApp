@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_reservation_app/presentation/bindings/auth_binding.dart';
 import 'package:service_reservation_app/routes/app_navigation.dart';
@@ -16,6 +17,8 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Get.putAsync(() async => AppNavigation());
+  await GetStorage.init();
+
   runApp(const MyApp());
 }
 

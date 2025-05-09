@@ -7,7 +7,6 @@ abstract class UserRepository {
 
   Future<void> logout();
 
-  Future<UserModel?> getCurrentUser();
+  String? getCurrentUserId();
 
-  Future<UserModel?> getUserById(String id);
 }

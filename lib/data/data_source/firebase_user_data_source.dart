@@ -9,7 +9,11 @@ class FirebaseUserRepository implements UserRepository {
   final String _usersCollection = 'users';
 
   @override
-  Future<UserModel?> register(String name, String email, String password) async {
+  Future<UserModel?> register(
+    String name,
+    String email,
+    String password,
+  ) async {
     try {
       final auth.UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -58,28 +62,8 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<UserModel?> getCurrentUser() async {
+  String? getCurrentUserId()  {
     final auth.User? currentUser = _auth.currentUser;
-    if (currentUser != null) {
-      final DocumentSnapshot<Map<String, dynamic>> snapshot =
-          await _firestore
-              .collection(_usersCollection)
-              .doc(currentUser.uid)
-              .get();
-      if (snapshot.exists) {
-        return UserModel.fromFirestore(snapshot);
-      }
-    }
-    return null;
-  }
-
-  @override
-  Future<UserModel?> getUserById(String id) async {
-    final DocumentSnapshot<Map<String, dynamic>> snapshot =
-        await _firestore.collection(_usersCollection).doc(id).get();
-    if (snapshot.exists) {
-      return UserModel.fromFirestore(snapshot);
-    }
-    return null;
+    return currentUser?.uid;
   }
 }

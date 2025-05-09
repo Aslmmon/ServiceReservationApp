@@ -22,4 +22,14 @@ class UserModel {
       'email': email,
     };
   }
+
+  factory UserModel.fromFirestoreMap(Map<String, dynamic> map) {
+    return UserModel(
+      id: map['id'] as String? ?? '', // Assuming you saved 'id' in toFirestore
+      name: map['name'] as String? ?? '',
+      email: map['email'] as String? ?? '',
+    );
+  }
+
+
 }

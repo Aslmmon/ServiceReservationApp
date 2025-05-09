@@ -20,7 +20,6 @@ class MyAppointmentsController extends GetxController {
   Future<void> fetchUserAppointments() async {
     isLoading.value = true;
     errorMessage.value = '';
-
     final result = await _getUserAppointmentsUseCase.execute();
     isLoading.value = false;
     appointments.assignAll(result);
