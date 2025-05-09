@@ -84,7 +84,10 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                 );
               } else {
                 return Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return Divider();
+                    },
                     itemCount: controller.specialistsByCategory.keys.length,
                     itemBuilder: (context, categoryIndex) {
                       final specialization =
@@ -92,42 +95,36 @@ class SpecialistListScreen extends GetView<SpecialistController> {
                               .toList()[categoryIndex];
                       final specialistsInCategory =
                           controller.specialistsByCategory[specialization]!;
-                      return AnimatedOpacity(
-                        duration: const Duration(seconds: 4),
-                        opacity: 1.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                specialization.tr,
-                                // Assuming specialization might be localizable
-                                style: AppTextStyles.heading,
-                              ),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              specialization.tr,
+                              // Assuming specialization might be localizable
+                              style: AppTextStyles.heading,
                             ),
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                              ),
-                              itemCount: specialistsInCategory.length,
-                              itemBuilder: (context, index) {
-                                final specialist = specialistsInCategory[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 20,
-                                    bottom: 20,
-                                  ),
-                                  child: SpecialistItem(
-                                    specialist: specialist,
-                                  ),
-                                );
-                              },
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
                             ),
-                          ],
-                        ),
+                            itemCount: specialistsInCategory.length,
+                            itemBuilder: (context, index) {
+                              final specialist = specialistsInCategory[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 20,
+                                  bottom: 20,
+                                ),
+                                child: SpecialistItem(specialist: specialist),
+                              );
+                            },
+                          ),
+                        ],
                       );
                     },
                   ),

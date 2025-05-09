@@ -8,10 +8,9 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
-import '../../utils/components/AppButton.dart';
-import '../../utils/components/AvailableChips.dart';
-import '../../utils/utils.dart';
-import 'confimationBottomSheet.dart';
+import '../specialists/components/calendar_view.dart';
+import '../specialists/components/next_button_view.dart';
+import '../specialists/components/time_selection_view.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -40,7 +39,9 @@ class _BookingScreenState extends State<BookingScreen> {
   void didUpdateWidget(covariant BookingScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     _updateAvailableTimes();
+
   }
+
 
   void _updateAvailableTimes() {
     if (_selectedDay != null && _specialist != null) {
@@ -67,7 +68,7 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.bookAppointment),
+        title: Text(AppStrings.bookAppointment.tr),
         leading: IconButton(
           icon: const Icon(
             size: 15,
@@ -82,147 +83,100 @@ class _BookingScreenState extends State<BookingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${AppStrings.bookWithSpecialist} ${_specialist?.name ?? AppStrings.loading}',
-              style: AppTextStyles.heading.copyWith(
-                color: AppColors.primaryPurple,
-              ),
-            ),
+            _buildSpecialistInfo(),
             const SizedBox(height: 24),
-            Text(
-              AppStrings.selectDate,
-              style: AppTextStyles.subHeading.copyWith(
-                color: AppColors.darkText,
-              ),
-            ),
-            const SizedBox(height: 10),
-            _buildCalendar(),
+            _buildDateSelection(),
             const SizedBox(height: 20),
-            Text(
-              AppStrings.selectTime,
-              style: AppTextStyles.label.copyWith(color: AppColors.darkText),
-            ),
+            _buildTimeLabel(),
             const SizedBox(height: 10),
-            _buildTimeSelection(),
+            _buildTimeSelectionView(),
             const SizedBox(height: 24),
-            if (_selectedTime != null)
-              Text(
-                '${AppStrings.selectedTime} ${_selectedTime!.format(context)}',
-                style: AppTextStyles.label.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            _buildSelectedTimeDisplay(),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: _buildNextButton(),
-      ),
-    );
-  }
-
-  Widget _buildCalendar() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: AppColors.primaryPurple.withOpacity(0.1),
-      ),
-      child: TableCalendar(
-        firstDay: DateTime.now(),
-        lastDay: DateTime(DateTime.now().year + 1),
-        focusedDay: _focusedDay,
-        calendarFormat: _calendarFormat,
-        selectedDayPredicate: (day) {
-          return isSameDay(_selectedDay, day);
-        },
-        onDaySelected: (selectedDay, focusedDay) {
-          if (!isSameDay(_selectedDay, selectedDay)) {
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-            });
-            _updateAvailableTimes();
-          }
-        },
-        onFormatChanged: (format) {
-          if (_calendarFormat != format) {
-            setState(() {
-              _calendarFormat = format;
-            });
-          }
-        },
-        onPageChanged: (focusedDay) {
-          _focusedDay = focusedDay;
-        },
-        calendarStyle: CalendarStyle(
-
-          isTodayHighlighted: false,
-          selectedDecoration: BoxDecoration(
-            color: AppColors.primaryPurple,
-            shape: BoxShape.circle,
-          ),
+        child: NextButtonView(
+          specialist: _specialist,
+          selectedDay: _selectedDay,
+          selectedTime: _selectedTime,
         ),
-
       ),
     );
   }
 
-  Widget _buildTimeSelection() {
-    if (_selectedDay == null) {
-      return Text(
-        AppStrings.pleaseSelectDateFirst,
-        style: AppTextStyles.label.copyWith(color: AppColors.lightText),
-      );
-    } else if (_availableTimesForSelectedDate.isEmpty) {
-      return Text(
-        AppStrings.noAvailableTimes,
-        style: AppTextStyles.label.copyWith(color: AppColors.darkText),
-      );
-    } else {
-      return AvailableTimeChips(
-        availableTimes: _availableTimesForSelectedDate,
-        selectedTime: _selectedTime,
-        onTimeSelected: (timeStr) {
-          final timeOfDay = convertStringToTimeOfDay(timeStr);
-          setState(() {
-            _selectedTime = timeOfDay;
-          });
-        },
-      );
-    }
+  Widget _buildSpecialistInfo() {
+    return Text(
+      '${AppStrings.bookWithSpecialist.tr} ${_specialist?.name ?? AppStrings.loading.tr}',
+      style: AppTextStyles.heading.copyWith(color: AppColors.primaryPurple),
+    );
   }
 
-  Widget _buildNextButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: ReusableButton(
-        text: AppStrings.nextReviewConfirm,
-        onPressed: () {
-          _selectedDay == null || _selectedTime == null || _specialist == null
-              ? null
-              : showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder: (BuildContext bc) {
-                  return buildConfirmationBottomSheet(
-                    context,
-                    _specialist?.name,
-                    _selectedDay,
-                    _selectedTime?.format(context),
-                    _specialist?.id,
-                    (appointment) {
-                      bookingController.bookAppointment(
-                        appointment.specialistId,
-                        appointment.userId,
-                        appointment.dateTime,
-                      );
-                    },
-                  );
-                },
-              );
-        },
-      ),
+  Widget _buildDateSelection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.selectDate.tr,
+          style: AppTextStyles.subHeading.copyWith(color: AppColors.darkText),
+        ),
+        const SizedBox(height: 10),
+        CalendarView(
+          focusedDay: _focusedDay,
+          calendarFormat: _calendarFormat,
+          selectedDay: _selectedDay,
+          onDaySelected: (selectedDay, focusedDay) {
+            if (!isSameDay(_selectedDay, selectedDay)) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+                _selectedTime = null; // Reset time on date change
+              });
+              _updateAvailableTimes();
+            }
+          },
+          onFormatChanged: (format) {
+            if (_calendarFormat != format) {
+              setState(() {
+                _calendarFormat = format;
+              });
+            }
+          },
+          onPageChanged: (focusedDay) {
+            _focusedDay = focusedDay;
+          },
+        ),
+      ],
     );
+  }
+
+  Widget _buildTimeLabel() {
+    return Text(
+      AppStrings.selectTime.tr,
+      style: AppTextStyles.label.copyWith(color: AppColors.darkText),
+    );
+  }
+
+  Widget _buildTimeSelectionView() {
+    return TimeSelectionView(
+      selectedDay: _selectedDay,
+      availableTimesForSelectedDate: _availableTimesForSelectedDate,
+      selectedTime: _selectedTime,
+      onTimeSelected: (timeOfDay) {
+        setState(() {
+          _selectedTime = timeOfDay;
+        });
+      },
+    );
+  }
+
+  Widget _buildSelectedTimeDisplay() {
+    return _selectedTime != null
+        ? Text(
+          '${AppStrings.selectedTime.tr} ${_selectedTime!.format(context)}',
+          style: AppTextStyles.label.copyWith(fontWeight: FontWeight.bold),
+        )
+        : const SizedBox.shrink();
   }
 }
