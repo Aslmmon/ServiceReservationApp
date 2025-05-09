@@ -99,12 +99,12 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text('No')),
           Obx(() {
-            final isCurrentlyCancelling =
-                controller.isCancelling[appointmentId]?.value ?? false;
+            final isCurrentlyCancelling = controller.isCancelling[appointmentId]?.value ?? false;
             return isCurrentlyCancelling
                 ? const CircularProgressIndicator()
                 : TextButton(
                   onPressed: () {
+                    print('Cancel button pressed for ${appointmentId}');
                     controller.cancelAppointment(appointmentId);
                     Get.back();
                   },

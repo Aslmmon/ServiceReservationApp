@@ -28,8 +28,7 @@ class MyAppointmentsController extends GetxController {
   }
 
   Future<void> cancelAppointment(String appointmentId) async {
-    isCancelling[appointmentId] =
-        true.obs; // Set loading to true for this appointment
+    isCancelling[appointmentId] = true.obs; // Set loading to true for this appointment
     errorMessage.value = '';
     try {
       await _cancelAppointmentUseCase.execute(appointmentId);
