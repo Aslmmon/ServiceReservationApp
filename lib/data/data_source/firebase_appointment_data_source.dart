@@ -137,6 +137,9 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
 
   String _getDayOfWeek(String? date, String? dateFormat) {
     try {
+      print("date is ${date}");
+      print("dateFormat is ${dateFormat}");
+
       DateTime appointmentDateTime = DateFormat(dateFormat).parse(date!);
       return DateFormat(
         'EEEE',
@@ -146,16 +149,27 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
       throw Exception('Invalid date format: $e'); // Throw exception with error
     }
   }
-
   String _formatTime(String? time) {
     try {
-      DateFormat inputFormat = DateFormat("h:mm a");
-      DateTime dateTime = inputFormat.parse(time!);
+      print("time is ${time}");
+      // print("dateFormat is ${dateFormat}");
+
+      // Attempt to parse with AM/PM format first
+      DateFormat inputFormatAMPM = DateFormat("h:mm a");
+      DateTime dateTimeAMPM = inputFormatAMPM.parse(time!);
       DateFormat outputFormat = DateFormat(AppTimeFormat);
-      return outputFormat.format(dateTime);
+      return outputFormat.format(dateTimeAMPM);
     } catch (e) {
-      debugPrint("Error formatting time: $e");
-      throw Exception("Invalid time format: $e");
+      try {
+        // If AM/PM format fails, try parsing as 24-hour format directly
+        DateFormat inputFormat24 = DateFormat(AppTimeFormat);
+        DateTime dateTime24 = inputFormat24.parse(time!);
+        return time; // No need to re-format if it's already 24-hour
+      } catch (e) {
+        // If both formats fail, throw the error
+        print("Error formatting time: $e");
+        throw Exception("Invalid time format: $e");
+      }
     }
   }
 }

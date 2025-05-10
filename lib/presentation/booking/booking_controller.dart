@@ -19,7 +19,6 @@ class BookingController extends GetxController {
       isBooking.value = false;
       await Get.find<MyAppointmentsController>().fetchUserAppointments();
       await Get.find<SpecialistController>().fetchSpecialists();
-
       Get.snackbar('Success', 'Appointment booked successfully!');
       return true;
     } catch (e) {

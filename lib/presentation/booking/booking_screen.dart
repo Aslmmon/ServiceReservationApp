@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart';
 import 'package:service_reservation_app/presentation/booking/booking_controller.dart';
+import 'package:service_reservation_app/routes/app_routes.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../utils/appColors/AppColors.dart';
@@ -103,9 +104,9 @@ class _BookingScreenState extends State<BookingScreen> {
             final isBookingSuccess = await bookingController.bookAppointment(
               appointment,
             );
-            // if (isBookingSuccess) {
-            //   Get.back();
-            // }
+            if (isBookingSuccess) {
+              Get.until((route) => route.settings.name == AppRoutes.home);
+            }
           },
         ),
       ),
