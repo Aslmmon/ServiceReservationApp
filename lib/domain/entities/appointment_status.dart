@@ -23,8 +23,6 @@ extension AppointmentStatusExtension on AppointmentStatus {
         return 'Pending';
       case AppointmentStatus.noShow:
         return 'No Show';
-      default:
-        return '';
-    }
+      }
   }
 }

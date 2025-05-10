@@ -12,6 +12,7 @@ class MyAppointmentsController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
   final RxMap<String, RxBool> isCancelling = <String, RxBool>{}.obs;
+  final RxBool isClosing = false.obs;
 
   @override
   void onInit() {

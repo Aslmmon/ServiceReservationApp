@@ -103,4 +103,11 @@ class AppStrings {
   static const String cancelAppointmentSuccess = 'Appointment cancelled successfully';
   static const String cancelAppointmentFailure = 'Failed to cancel appointment';
 
+
+  static const String cancelAppointmentAlertDialogTitle = 'Cancel Appointment ?';
+  static const String cancelAppointmentAlertDialogSubtitle = 'Are you sure you want to cancel this appointment ?';
+  static const String cancelAppointmentAlertDialogYesTitle = 'Yes, Cancel';
+
+  static const String noTitle = 'No';
+
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:service_reservation_app/utils/appStrings/AppStrings.dart';
 
 class AvailableTimesWidget extends StatelessWidget {
   final Map<String, List<dynamic>> availableTimes;

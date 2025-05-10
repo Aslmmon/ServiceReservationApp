@@ -17,7 +17,6 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
           .collection(_appointmentsCollection)
           .add(appointment.toFirestore());
     } catch (e) {
-      print('Error booking appointment: $e');
       rethrow;
     }
   }
@@ -40,7 +39,6 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
           .doc(appointmentId)
           .delete();
     } catch (e) {
-      print('Error cancelling appointment: $e');
       rethrow;
     }
   }

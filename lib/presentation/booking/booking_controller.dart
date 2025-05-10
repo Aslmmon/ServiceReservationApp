@@ -15,7 +15,6 @@ class BookingController extends GetxController {
   Future<void> bookAppointment(Appointment appointment) async {
     isBooking.value = true;
     bookingError.value = '';
-    print(" appointment is  ${appointment.userId.toString()}");
     try {
       await _bookAppointmentUseCase.execute(appointment);
       isBooking.value = false;

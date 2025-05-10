@@ -7,7 +7,6 @@ TimeOfDay? convertStringToTimeOfDay(String timeStr) {
     final parsedTime = format.parse(timeStr);
     return TimeOfDay(hour: parsedTime.hour, minute: parsedTime.minute);
   } catch (e) {
-    print('Error parsing time string: $e');
     return null;
   }
 }

@@ -30,11 +30,11 @@ class _CalendarViewState extends State<CalendarView> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: AppColors.primaryPurple.withOpacity(0.1),
+        color: AppColors.primaryPurple.withValues(alpha: 0.1),
       ),
       child: TableCalendar(
         firstDay: DateTime.now(),
-        lastDay: DateTime(DateTime.now().year+1 ),
+        lastDay: DateTime(DateTime.now().year + 1),
         focusedDay: widget.focusedDay,
         calendarFormat: widget.calendarFormat,
         selectedDayPredicate: (day) {

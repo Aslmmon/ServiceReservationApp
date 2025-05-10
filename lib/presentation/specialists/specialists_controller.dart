@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart'
-    show Specialist, createDummySpecialistList, specialistLists;
+    show Specialist, specialistLists;
 import 'package:service_reservation_app/data/models/user_model.dart';
-import 'package:service_reservation_app/domain/use_cases/appointment/GetUserAppointmentsUseCase.dart';
-import 'package:service_reservation_app/domain/use_cases/auth/get_current_user_use_case.dart';
 import 'package:service_reservation_app/domain/use_cases/specialities/get_all_specialists_use_case.dart'
     show GetAllSpecialistsUseCase;
 import 'package:service_reservation_app/domain/use_cases/specialities/get_specialist_by_id_use_case.dart'
@@ -47,7 +44,7 @@ class SpecialistController extends GetxController {
     final result = await _getAllSpecialistsUseCase.execute();
 
     isLoading.value = false;
-    if (result != null) {
+    if (result.isNotEmpty) {
       _allSpecialists.assignAll(result);
       filterSpecialists(searchQuery.value); // Apply initial filtering
       _groupSpecialistsByCategory(_allSpecialists);
@@ -66,7 +63,7 @@ class SpecialistController extends GetxController {
           .doc(value.id)
           .set(value.toFirestore())
           .onError(
-            (e, _) => print("Error writing document for ${value.name}: $e"),
+            (e, _) => debugPrint("Error writing document for ${value.name}: $e"),
           );
     }
 
@@ -79,7 +76,7 @@ class SpecialistController extends GetxController {
         Get.offAllNamed(AppRoutes.login);
       });
     } catch (e) {
-      print('Error signing out: $e');
+      debugPrint(e.toString());
     }
   }
 

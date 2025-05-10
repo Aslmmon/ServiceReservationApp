@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -82,7 +80,6 @@ class AuthController extends GetxController {
 
   UserModel? getUserLocal() {
     final userMap = box.read<Map<String, dynamic>>('user');
-    print("user is " + userMap.toString());
     if (userMap != null) {
       return UserModel(
         id: userMap['id'] as String? ?? '',

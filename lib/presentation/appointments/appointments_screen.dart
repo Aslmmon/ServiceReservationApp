@@ -48,7 +48,6 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
         itemCount: controller.appointments.length,
         itemBuilder: (context, index) {
           final appointment = controller.appointments[index];
-          print(appointment.date.toString());
           return _buildAppointmentItem(appointment);
         },
       );
@@ -79,9 +78,7 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
             const SizedBox(height: 16),
             ReusableButton(
               text: AppStrings.cancel,
-              onPressed: () {
-                _showCancelConfirmationDialog(appointment.id!);
-              },
+              onPressed: () => _showCancelConfirmationDialog(appointment.id!),
             ),
           ],
         ),
@@ -89,29 +86,24 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
     );
   }
 
-  Future<void> _showCancelConfirmationDialog(String appointmentId) async {
+  _showCancelConfirmationDialog(String appointmentId) {
     return Get.dialog(
       AlertDialog(
-        title: const Text('Cancel Appointment?'),
-        content: const Text(
-          'Are you sure you want to cancel this appointment?',
-        ),
+        title: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
+        content: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('No')),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: const Text(AppStrings.noTitle),
+          ),
           Obx(() {
-            final isCurrentlyCancelling = controller.isCancelling[appointmentId]?.value ?? false;
+            final isCurrentlyCancelling =
+                controller.isCancelling[appointmentId]?.value ?? false;
             return isCurrentlyCancelling
                 ? const CircularProgressIndicator()
-                : TextButton(
-                  onPressed: () {
-                    print('Cancel button pressed for ${appointmentId}');
-                    controller.cancelAppointment(appointmentId);
-                    Get.back();
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: AppColors.darkText,
-                  ),
-                  child: const Text('Yes, Cancel'),
+                : GestureDetector(
+                  onTap: () => controller.cancelAppointment(appointmentId),
+                  child: Text(AppStrings.cancelAppointmentAlertDialogYesTitle),
                 );
           }),
         ],

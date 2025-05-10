@@ -31,7 +31,6 @@ class FirebaseUserRepository implements UserRepository {
       }
       return null;
     } catch (e) {
-      print('Error registering user: $e');
       return null;
     }
   }
@@ -51,7 +50,6 @@ class FirebaseUserRepository implements UserRepository {
       }
       return null;
     } catch (e) {
-      print('Error logging in: $e');
       return null;
     }
   }

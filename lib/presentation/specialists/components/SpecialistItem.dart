@@ -14,11 +14,10 @@ import '../../../utils/components/AppButton.dart';
 class SpecialistItem extends StatelessWidget {
   final Specialist specialist;
 
-  const SpecialistItem({Key? key, required this.specialist}) : super(key: key);
+  const SpecialistItem({super.key, required this.specialist});
 
   @override
   Widget build(BuildContext context) {
-    print(specialist.availableDays.toString());
     return Column(
       children: [
         Row(
