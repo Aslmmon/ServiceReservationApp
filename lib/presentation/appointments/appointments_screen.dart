@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:service_reservation_app/presentation/appointments/appointments_controller.dart';
 import 'package:service_reservation_app/utils/components/AppButton.dart';
 import '../../data/models/appointment_model.dart';
+import '../../routes/app_routes.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
@@ -76,12 +77,9 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
               style: AppTextStyles.subHeading,
             ),
             const SizedBox(height: 16),
-            Obx(
-              () => ReusableButton(
-                text: AppStrings.cancel,
-                isLoading: controller.isCancelling.value,
-                onPressed: () => _showCancelConfirmationDialog(appointment.id!),
-              ),
+            ReusableButton(
+              text: AppStrings.cancel,
+              onPressed: () => _showCancelConfirmationDialog(appointment.id!),
             ),
           ],
         ),
@@ -91,6 +89,7 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
 
   _showCancelConfirmationDialog(String appointmentId) {
     return Get.dialog(
+      barrierDismissible: false,
       AlertDialog(
         title: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
         content: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
@@ -99,9 +98,21 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
             onPressed: () => Get.back(),
             child: const Text(AppStrings.noTitle),
           ),
-          TextButton(
-            onPressed: () => controller.cancelAppointment(appointmentId),
-            child: Text(AppStrings.cancelAppointment),
+          Obx(
+            () => TextButton(
+              onPressed: () async {
+                final result = await controller.cancelAppointment(
+                  appointmentId,
+                );
+                if (result == true) {
+                  Get.until((route) => route.settings.name == AppRoutes.home);
+                }
+              },
+              child:
+                  controller.isCancelling == true
+                      ? CircularProgressIndicator()
+                      : Text(AppStrings.cancelAppointment),
+            ),
           ),
         ],
       ),

@@ -28,7 +28,7 @@ class MyAppointmentsController extends GetxController {
     appointments.assignAll(result);
   }
 
-  Future<void> cancelAppointment(String appointmentId) async {
+  Future<bool> cancelAppointment(String appointmentId) async {
     isCancelling.value = true;
     errorMessage.value = '';
     try {
@@ -36,11 +36,13 @@ class MyAppointmentsController extends GetxController {
       appointments.removeWhere((appt) => appt.id == appointmentId);
       Get.snackbar(AppStrings.ok, AppStrings.cancelAppointmentSuccess);
       await Get.find<SpecialistController>().fetchSpecialists();
-
       appointments.refresh();
+      return true;
     } catch (e) {
-      errorMessage.value = '${AppStrings.cancelAppointmentFailure}: ${e.toString()}';
+      errorMessage.value =
+          '${AppStrings.cancelAppointmentFailure}: ${e.toString()}';
       Get.snackbar(AppStrings.cancel, errorMessage.value);
+      return false;
     } finally {
       isCancelling.value = false;
     }
