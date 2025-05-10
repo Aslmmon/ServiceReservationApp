@@ -96,18 +96,21 @@ class _BookingScreenState extends State<BookingScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: NextButtonView(
-          specialist: _specialist,
-          selectedDay: _selectedDay,
-          selectedTime: _selectedTime,
-          onBookAppointment: (appointment) async {
-            final isBookingSuccess = await bookingController.bookAppointment(
-              appointment,
-            );
-            if (isBookingSuccess) {
-              Get.until((route) => route.settings.name == AppRoutes.home);
-            }
-          },
+        child: Obx(
+          () => NextButtonView(
+            isLoading: bookingController.isBooking.value,
+            specialist: _specialist,
+            selectedDay: _selectedDay,
+            selectedTime: _selectedTime,
+            onBookAppointment: (appointment) async {
+              final isBookingSuccess = await bookingController.bookAppointment(
+                appointment,
+              );
+              if (isBookingSuccess) {
+                Get.until((route) => route.settings.name == AppRoutes.home);
+              }
+            },
+          ),
         ),
       ),
     );

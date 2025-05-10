@@ -15,7 +15,7 @@ class ReusableButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.height = 50,
-     this.width = double.infinity,
+    this.width = double.infinity,
   });
 
   @override

@@ -7,7 +7,6 @@ import '../../utils/appAssets/AppAssets.dart';
 import '../../utils/appColors/AppColors.dart';
 import '../../utils/appStrings/AppStrings.dart';
 import '../../utils/appTextStyle/AppTextStyles.dart';
-import '../auth/auth_controller.dart';
 import 'components/SpecialistItem.dart';
 import 'components/empty_state.dart';
 import 'components/error_message.dart';

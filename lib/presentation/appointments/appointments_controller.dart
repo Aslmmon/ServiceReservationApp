@@ -12,8 +12,7 @@ class MyAppointmentsController extends GetxController {
   final RxList<Appointment> appointments = <Appointment>[].obs;
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
-  final RxMap<String, RxBool> isCancelling = <String, RxBool>{}.obs;
-  final RxBool isClosing = false.obs;
+  final RxBool isCancelling = false.obs;
 
   @override
   void onInit() {
@@ -30,7 +29,7 @@ class MyAppointmentsController extends GetxController {
   }
 
   Future<void> cancelAppointment(String appointmentId) async {
-    isCancelling[appointmentId] = true.obs; // Set loading to true for this appointment
+    isCancelling.value = true;
     errorMessage.value = '';
     try {
       await _cancelAppointmentUseCase.execute(appointmentId);
@@ -43,8 +42,7 @@ class MyAppointmentsController extends GetxController {
       errorMessage.value = '${AppStrings.cancelAppointmentFailure}: ${e.toString()}';
       Get.snackbar(AppStrings.cancel, errorMessage.value);
     } finally {
-      isCancelling[appointmentId]?.value = false; // Set loading to false
-      isCancelling.remove(appointmentId); // Clean up the map
+      isCancelling.value = false;
     }
   }
 }

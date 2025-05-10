@@ -76,9 +76,12 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
               style: AppTextStyles.subHeading,
             ),
             const SizedBox(height: 16),
-            ReusableButton(
-              text: AppStrings.cancel,
-              onPressed: () => _showCancelConfirmationDialog(appointment.id!),
+            Obx(
+              () => ReusableButton(
+                text: AppStrings.cancel,
+                isLoading: controller.isCancelling.value,
+                onPressed: () => _showCancelConfirmationDialog(appointment.id!),
+              ),
             ),
           ],
         ),
@@ -87,9 +90,7 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
   }
 
   _showCancelConfirmationDialog(String appointmentId) {
-    RxBool isCancellingDialog = false.obs; // Local RxBool for this dialog
     return Get.dialog(
-      barrierDismissible: false,
       AlertDialog(
         title: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
         content: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
@@ -98,24 +99,10 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
             onPressed: () => Get.back(),
             child: const Text(AppStrings.noTitle),
           ),
-          Obx(() {
-            final isCurrentlyCancelling =
-                controller.isCancelling[appointmentId]?.value ?? false;
-            return isCurrentlyCancelling
-                ? const CircularProgressIndicator()
-                : GestureDetector(
-                  onTap: ()  async {
-                    if (!isCancellingDialog.value) {
-                      isCancellingDialog.value = true; // Prevent multiple taps on this dialog
-                      Get.back(); // Close the dialog immediately
-                      await Future.delayed(const Duration(milliseconds: 300)); // Small delay to ensure dialog is closed
-                      await controller.cancelAppointment(appointmentId);
-                      isCancellingDialog.value = false;
-                    }
-                  } ,
-                  child: Text(AppStrings.cancelAppointmentAlertDialogYesTitle),
-                );
-          }),
+          TextButton(
+            onPressed: () => controller.cancelAppointment(appointmentId),
+            child: Text(AppStrings.cancelAppointment),
+          ),
         ],
       ),
     );

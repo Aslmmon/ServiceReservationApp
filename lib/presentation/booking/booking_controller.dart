@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:service_reservation_app/data/models/appointment_model.dart';
 import 'package:service_reservation_app/domain/use_cases/auth/get_current_user_use_case.dart';
@@ -15,8 +16,8 @@ class BookingController extends GetxController {
     isBooking.value = true;
     bookingError.value = '';
     try {
+      debugPrint(isBooking.value.toString());
       await _bookAppointmentUseCase.execute(appointment);
-      isBooking.value = false;
       await Get.find<MyAppointmentsController>().fetchUserAppointments();
       await Get.find<SpecialistController>().fetchSpecialists();
       Get.snackbar('Success', 'Appointment booked successfully!');
