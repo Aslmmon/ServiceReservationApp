@@ -37,8 +37,7 @@ class MyAppointmentsController extends GetxController {
       Get.snackbar(AppStrings.ok, AppStrings.cancelAppointmentSuccess);
       appointments.refresh();
     } catch (e) {
-      errorMessage.value =
-          '${AppStrings.cancelAppointmentFailure}: ${e.toString()}';
+      errorMessage.value = '${AppStrings.cancelAppointmentFailure}: ${e.toString()}';
       Get.snackbar(AppStrings.cancel, errorMessage.value);
     } finally {
       isCancelling[appointmentId]?.value = false; // Set loading to false

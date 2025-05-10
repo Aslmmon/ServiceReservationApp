@@ -87,7 +87,9 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
   }
 
   _showCancelConfirmationDialog(String appointmentId) {
+    RxBool isCancellingDialog = false.obs; // Local RxBool for this dialog
     return Get.dialog(
+      barrierDismissible: false,
       AlertDialog(
         title: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
         content: const Text(AppStrings.cancelAppointmentAlertDialogTitle),
@@ -102,7 +104,15 @@ class MyAppointmentsScreen extends GetView<MyAppointmentsController> {
             return isCurrentlyCancelling
                 ? const CircularProgressIndicator()
                 : GestureDetector(
-                  onTap: () => controller.cancelAppointment(appointmentId),
+                  onTap: ()  async {
+                    if (!isCancellingDialog.value) {
+                      isCancellingDialog.value = true; // Prevent multiple taps on this dialog
+                      Get.back(); // Close the dialog immediately
+                      await Future.delayed(const Duration(milliseconds: 300)); // Small delay to ensure dialog is closed
+                      await controller.cancelAppointment(appointmentId);
+                      isCancellingDialog.value = false;
+                    }
+                  } ,
                   child: Text(AppStrings.cancelAppointmentAlertDialogYesTitle),
                 );
           }),
