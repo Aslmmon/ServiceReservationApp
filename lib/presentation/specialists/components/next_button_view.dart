@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:service_reservation_app/data/models/appointment_model.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart';
 import '../../../utils/appStrings/AppStrings.dart';
 import '../../../utils/components/AppButton.dart';
@@ -10,7 +11,7 @@ class NextButtonView extends StatelessWidget {
   final Specialist? specialist;
   final DateTime? selectedDay;
   final TimeOfDay? selectedTime;
-  final Function(dynamic)? onBookAppointment; // Adjust the type if needed
+  final Function(Appointment) onBookAppointment; // Adjust the type if needed
   final BookingController bookingController = Get.find();
 
   NextButtonView({
@@ -18,7 +19,7 @@ class NextButtonView extends StatelessWidget {
     this.specialist,
     this.selectedDay,
     this.selectedTime,
-    this.onBookAppointment,
+   required this.onBookAppointment,
   });
 
   @override
@@ -42,7 +43,7 @@ class NextButtonView extends StatelessWidget {
                   selectedTime?.format(context),
                   specialist?.id,
                   (appointment) {
-                    bookingController.bookAppointment(appointment);
+                    onBookAppointment(appointment);
                   },
                 );
               },

@@ -25,7 +25,6 @@ class FirebaseAppointmentRepository implements AppointmentRepository {
             specialistData.containsKey('availableDays')) {
           final availableDays =
               specialistData['availableDays'] as Map<String, dynamic>;
-          final dateFormat = AppDateFormat; // Define the date format
 
           final appointmentDay = _getDayOfWeek(appointment.date, AppDateFormat);
           final formattedTime = _formatTime(appointment.time);

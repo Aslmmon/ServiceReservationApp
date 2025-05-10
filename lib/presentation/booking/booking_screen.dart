@@ -99,6 +99,14 @@ class _BookingScreenState extends State<BookingScreen> {
           specialist: _specialist,
           selectedDay: _selectedDay,
           selectedTime: _selectedTime,
+          onBookAppointment: (appointment) async {
+            final isBookingSuccess = await bookingController.bookAppointment(
+              appointment,
+            );
+            // if (isBookingSuccess) {
+            //   Get.back();
+            // }
+          },
         ),
       ),
     );
