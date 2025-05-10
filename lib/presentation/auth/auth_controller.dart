@@ -78,17 +78,7 @@ class AuthController extends GetxController {
     loggedInUser.value = user;
   }
 
-  UserModel? getUserLocal() {
-    final userMap = box.read<Map<String, dynamic>>('user');
-    if (userMap != null) {
-      return UserModel(
-        id: userMap['id'] as String? ?? '',
-        name: userMap['name'] as String? ?? '',
-        email: userMap['email'] as String? ?? '',
-      );
-    }
-    return null;
-  }
+
 
   Future<void> clearUserLocal() async {
     await box.remove('user');

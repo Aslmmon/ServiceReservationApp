@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:service_reservation_app/data/models/specialist_model.dart'
     show Specialist, specialistLists;
 import 'package:service_reservation_app/data/models/user_model.dart';
@@ -28,6 +29,7 @@ class SpecialistController extends GetxController {
   final TextEditingController searchController = TextEditingController();
 
   final Rxn<UserModel> loggedInUser = Rxn<UserModel>();
+  final box = GetStorage();
 
   @override
   void onInit() {
@@ -53,6 +55,18 @@ class SpecialistController extends GetxController {
     }
   }
 
+  UserModel? getUserLocal() {
+    final userMap = box.read<Map<String, dynamic>>('user');
+    if (userMap != null) {
+      return UserModel(
+        id: userMap['id'] as String? ?? '',
+        name: userMap['name'] as String? ?? '',
+        email: userMap['email'] as String? ?? '',
+      );
+    }
+    return null;
+  }
+
   Future<void> submitSpecialists() async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
     errorMessage.value = '';
@@ -63,7 +77,8 @@ class SpecialistController extends GetxController {
           .doc(value.id)
           .set(value.toFirestore())
           .onError(
-            (e, _) => debugPrint("Error writing document for ${value.name}: $e"),
+            (e, _) =>
+                debugPrint("Error writing document for ${value.name}: $e"),
           );
     }
 

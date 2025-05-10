@@ -43,7 +43,7 @@ class SpecialistListScreen extends GetView<SpecialistController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              " ${AppStrings.emojiHi} ${Get.find<AuthController>().getUserLocal()?.name} ",
+              " ${AppStrings.emojiHi} ${Get.find<SpecialistController>().getUserLocal()?.name} ",
               style: AppTextStyles.heading,
             ),
             ReusableTextField(
