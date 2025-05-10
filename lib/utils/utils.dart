@@ -11,12 +11,15 @@ TimeOfDay? convertStringToTimeOfDay(String timeStr) {
   }
 }
 
+const AppDateFormat = "EEEE, MMMM d, y";
+const AppTimeFormat = "HH:mm";
+
 extension DateTimeExtension on DateTime {
   String formatDate() {
-    return DateFormat('EEEE, MMMM d, y').format(this);
+    return DateFormat(AppDateFormat).format(this);
   }
 
   String formatTime() {
-    return DateFormat('h:mm a').format(this);
+    return DateFormat('HH:mm').format(this);
   }
 }
