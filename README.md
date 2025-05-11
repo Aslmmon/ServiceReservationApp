@@ -1,4 +1,4 @@
-# Service Reservation App 🚀
+# Service Reservation Doctors App  👨‍⚕️ 🚀
 
 ## Overview
 
@@ -79,7 +79,7 @@ The app follows a layered architecture, primarily using the GetX framework. Here
 * **GetX:** Used for state management, dependency injection, and route management. Controllers (like `BookingController`, `SpecialistsController`) manage the state for specific parts of the UI. 🧰
 * **Firebase:**
     * **Firestore:** Used as the database to store specialist information, appointment details, and (potentially) user data. 🔥
-    * **Authentication:** (If used) Handles user authentication. 🔑
+    * **Authentication:**  Handles user authentication. 🔑
 
 ## Business Understanding Answers
 
@@ -89,14 +89,13 @@ The app follows a layered architecture, primarily using the GetX framework. Here
 2.  **Who are the target users?**
     * The target users are individuals who need to book appointments with service providers, such as: 🎯
         * Patients booking appointments with doctors or medical specialists. 🩺
-        * Clients booking appointments with consultants, lawyers, or other professionals. 💼
-        * Customers booking appointments for personal services (e.g., salons, spas). 💇‍♀️💆‍♂️
+        
 
 3.  **What value does this app provide to its users?**
     * **Convenience:** Users can book appointments anytime, anywhere, using their mobile devices. 📱
     * **Efficiency:** The app streamlines the booking process, saving users time and effort. ⏱️
     * **Clarity:** Users can easily view specialist availability and select suitable time slots. ✅
-    * **Organization:** (If implemented) Users can manage their appointments in one place, reducing the risk of missed appointments. 📅
+    * **Organization:** Users can manage their appointments in one place, reducing the risk of missed appointments. 📅
 
 ## Business Understanding Test
 
@@ -120,6 +119,8 @@ One feature that could significantly enhance the booking experience is **interac
     * Specialist reviews and ratings. ⭐
     * Payment integration. 💳
     * More robust error handling and user feedback. ⚠️
+    * Pagination feature to load lare amount of data in Specialist list 👤
+
 * **Testing:** More comprehensive unit and integration tests could be added to ensure the app's stability and reliability. 🧪
 * **Scalability:** Considerations for handling a large number of users and appointments might need further refinement (e.g., database optimizations, caching). ⬆️
 * **Real-time Updates:** The app may not reflect real-time changes in specialist availability if multiple users are booking simultaneously. This could be improved with more sophisticated state management or backend solutions (e.g., WebSockets). ⚡
