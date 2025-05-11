@@ -72,23 +72,6 @@ The app follows a layered architecture, primarily using the GetX framework. Here
     * **Firestore:** Used as the database to store specialist information, appointment details, and (potentially) user data. 🔥
     * **Authentication:**  Handles user authentication. 🔑
 
-## Business Understanding Answers
-
-1.  **What problem does this app solve?**
-    * This app solves the problem of inefficient appointment booking. 😫 It provides a digital platform for users to easily browse available specialists, view their schedules, and book appointments without the need for phone calls or manual scheduling. 🥳
-
-2.  **Who are the target users?**
-    * The target users are individuals who need to book appointments with service providers, such as: 🎯
-        * Patients booking appointments with doctors or medical specialists. 🩺
-        
-
-3.  **What value does this app provide to its users?**
-    * **Convenience:** Users can book appointments anytime, anywhere, using their mobile devices. 📱
-    * **Efficiency:** The app streamlines the booking process, saving users time and effort. ⏱️
-    * **Clarity:** Users can easily view specialist availability and select suitable time slots. ✅
-    * **Organization:** Users can manage their appointments in one place, reducing the risk of missed appointments. 📅
-
-## Business Understanding Test
 
 ### Business Requirements Understanding:
 
