@@ -72,6 +72,7 @@ The app follows a layered architecture, primarily using the GetX framework. Here
     * **Firestore:** Used as the database to store specialist information, appointment details, and (potentially) user data. 🔥
     * **Authentication:**  Handles user authentication. 🔑
 
+## Business Requirements Answers:
 
 ### Business Requirements Understanding:
 
