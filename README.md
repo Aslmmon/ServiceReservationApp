@@ -59,9 +59,9 @@ The app follows a layered architecture, primarily using the GetX framework. Here
 * **`main.dart`:** The entry point of the application. Initializes Firebase, sets up GetX controllers, and runs the `GetMaterialApp`. 🚀
 * **`data/`:**
     * `data/models`: Contains the data models used in the app (e.g., `Specialist`, `Appointment`). These models define the structure of the data retrieved from Firebase. 🗂️
-    * `data/repositories`: Implements the data layer, responsible for fetching and manipulating data. Uses Firebase Firestore for database operations. This is where the actual interaction with Firebase occurs. 📦
+    * `data/data_sources`:  Implements the data layer, responsible for fetching and manipulating data. Uses Firebase Firestore for database operations. This is where the actual interaction with Firebase occurs. 📦
 * **`domain/`:**
-    * `domain/entities`: (If present) Could contain core business entities, which are a more abstract representation of the data. 💼
+    * `domain/repositories`: Defines the abstracted contract between Domain layer and data layer as : AppointmentRepository , SpecialistRepository , UserRepository . 
     * `domain/use_cases`: Defines the business logic of the application. Use cases orchestrate the interaction between repositories and present the data to the presentation layer. For example, `BookAppointmentUseCase`, `GetSpecialistsUseCase`. ⚙️
 * **`presentation/`:**
     * `presentation/booking`: Contains the `BookingScreen` and its associated logic, allowing users to select a date and time and confirm their appointment. The `BookingController` manages the state for this screen. 📅
@@ -69,13 +69,16 @@ The app follows a layered architecture, primarily using the GetX framework. Here
     * `presentation/appointments`: Contains the `MyAppointmentsScreen` for displaying user appointments. 📆
     * `presentation/widgets`: Reusable UI components. 🧩
 * **`utils/`:**
-    * `utils/appColors`: Defines the color palette used throughout the app. 🎨
+    * `utils/appColors`: Defines the color palette used throughout the app. 🎨 -> could also use Theme.context to manage light/dark theme. 
     * `utils/appStrings`: Contains string constants for localization and to avoid hardcoded strings. 📝
     * `utils/appTextStyle`: Defines the text styles used in the app. ✍️
+* **`routes/`:**
+    * `utils/app_routes`: This file defines the application's navigation routes using the GetX package. It specifies how the app navigates between different screens (e.g., login, register, home) and associates each screen with its corresponding widget and any necessary dependencies
+    * `utils/app_navigation`: responsible for handling the app's navigation logic. It determines the initial screen to display based on the user's authentication state (whether they are logged in or not) and provides methods for navigating to different parts of the app
 
 ## Key Components and Technologies
 
-* **Flutter:** The primary framework for building the cross-platform mobile application. 💙
+* **Flutter:** The primary framework for building cross-platform mobile applications. 💙
 * **GetX:** Used for state management, dependency injection, and route management. Controllers (like `BookingController`, `SpecialistsController`) manage the state for specific parts of the UI. 🧰
 * **Firebase:**
     * **Firestore:** Used as the database to store specialist information, appointment details, and (potentially) user data. 🔥
@@ -119,7 +122,7 @@ One feature that could significantly enhance the booking experience is **interac
     * Specialist reviews and ratings. ⭐
     * Payment integration. 💳
     * More robust error handling and user feedback. ⚠️
-    * Pagination feature to load lare amount of data in Specialist list 👤
+    * Pagination feature to load large amount of data inthe  Specialist list 👤
 
 * **Testing:** More comprehensive unit and integration tests could be added to ensure the app's stability and reliability. 🧪
 * **Scalability:** Considerations for handling a large number of users and appointments might need further refinement (e.g., database optimizations, caching). ⬆️
@@ -127,5 +130,8 @@ One feature that could significantly enhance the booking experience is **interac
 
 ## App WorkFlow Demo : 
 
-https://drive.google.com/file/d/1mFbgJnMklxqeeOGWa6N6M6lGlO9iybRH/view?usp=sharing
+[Watch the App Demo Reel on YouTube](https://www.youtube.com/shorts/HCueeOQJ9nE)
+
+This is a short demo of the Service Reservation App in action. Click the link above to view the reel on YouTube.
+
 
