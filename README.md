@@ -20,33 +20,21 @@ The Service Reservation App is a mobile application built using Flutter 📱 tha
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/Aslmmon/ServiceReservationApp.git](https://github.com/Aslmmon/ServiceReservationApp.git)
+    git clone https://github.com/Aslmmon/ServiceReservationApp.git
     cd ServiceReservationApp
     ```
 
 2.  **Install Flutter:**
     Ensure you have Flutter installed on your machine. If not, follow the official Flutter installation guide: [https://flutter.dev/docs/get-started/install](https://flutter.dev/docs/get-started/install) 🛠️
 
-3.  **Set up Firebase:**
 
-    * Create a Firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/). ☁️
-    * Enable Authentication 
-    * Create a Firestore database. 🗄️
-    * Enable the Firebase Authentication API.
-
-4.  **Configure Firebase Credentials:**
-
-    * Download the `google-services.json` (for Android) and `GoogleService-Info.plist` (for iOS) configuration files from your Firebase project settings. 🔑
-    * Place the `google-services.json` file in the `android/app/` directory. 📂
-    * Place the `GoogleService-Info.plist` file in the `ios/` directory. 📲
-
-5.  **Install Dependencies:**
+3.  **Install Dependencies:**
 
     ```bash
     flutter pub get
     ```
 
-6.  **Run the App:**
+4.  **Run the App:**
 
     ```bash
     flutter run
@@ -122,7 +110,7 @@ One feature that could significantly enhance the booking experience is **interac
     * Specialist reviews and ratings. ⭐
     * Payment integration. 💳
     * More robust error handling and user feedback. ⚠️
-    * Pagination feature to load large amount of data inthe  Specialist list 👤
+    * Pagination feature to load large amount of data in the  Specialist list 👤
 
 * **Testing:** More comprehensive unit and integration tests could be added to ensure the app's stability and reliability. 🧪
 * **Scalability:** Considerations for handling a large number of users and appointments might need further refinement (e.g., database optimizations, caching). ⬆️
