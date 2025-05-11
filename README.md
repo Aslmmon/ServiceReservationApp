@@ -40,6 +40,17 @@ The Service Reservation App is a mobile application built using Flutter 📱 tha
     flutter run
     ```
 
+## App WorkFlow Demo : 
+
+[Watch the App Demo Reel on YouTube](https://www.youtube.com/shorts/HCueeOQJ9nE)
+
+☝️☝️  This is a short demo of the Service Reservation App in action. Click the link above to view the reel on YouTube. 
+
+[APK downloadable link to test live](https://drive.google.com/file/d/1zPftoKCAe1iBm8aF0BwGv4aUIynl_tSh/view?usp=sharing)
+
+☝️☝️ you can download apk on Android Device to test actual implementation .
+
+
 ## App Architecture Explanation
 
 The app follows a layered architecture, primarily using the GetX framework. Here's a breakdown: 🏗️
@@ -100,12 +111,6 @@ One feature that could significantly enhance the booking experience is **interac
 * **Scalability:** Considerations for handling a large number of users and appointments might need further refinement (e.g., database optimizations, caching). ⬆️
 * **Real-time Updates:** The app may not reflect real-time changes in specialist availability if multiple users are booking simultaneously. This could be improved with more sophisticated state management or backend solutions (e.g., WebSockets). ⚡
 
-## App WorkFlow Demo : 
 
-[Watch the App Demo Reel on YouTube](https://www.youtube.com/shorts/HCueeOQJ9nE)
-
-This is a short demo of the Service Reservation App in action. Click the link above to view the reel on YouTube.
-
-[APK downloadable link to test live](https://drive.google.com/file/d/1zPftoKCAe1iBm8aF0BwGv4aUIynl_tSh/view?usp=sharing)
 
 
