@@ -106,4 +106,6 @@ One feature that could significantly enhance the booking experience is **interac
 
 This is a short demo of the Service Reservation App in action. Click the link above to view the reel on YouTube.
 
+[APK downloadable link to test live](https://drive.google.com/file/d/1zPftoKCAe1iBm8aF0BwGv4aUIynl_tSh/view?usp=sharing)
+
 
